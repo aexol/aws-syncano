@@ -1,0 +1,1 @@
+{"version":3,"sources":["default_bucket.js"],"names":["ctx","meta","instance"],"mappings":";;;;;;kBAAeA,OAAQ,GAAEA,IAAIC,IAAJ,CAASC,QAAS,S","file":"default_bucket.js","sourcesContent":["export default ctx => `${ctx.meta.instance}-bucket`\n"]}
