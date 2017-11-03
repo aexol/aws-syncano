@@ -1,1 +1,0 @@
-{"version":3,"sources":["default_region.js"],"names":["ctx","REGION","config"],"mappings":";;;;;;kBAAeA,OAAO;AACpB,QAAM,EAACC,SAAS,cAAV,KAA4BD,IAAIE,MAAtC;AACA,SAAOD,MAAP;AACD,C","file":"default_region.js","sourcesContent":["export default ctx => {\n  const {REGION = 'eu-central-1'} = ctx.config\n  return REGION\n}\n"]}
