@@ -21,12 +21,11 @@ config:
     description: |
       Amazon region
       Example: eu-central-1
+
 classes:
   keypairs:
     - name: name
       type: string
-      description: |
-        Name of the EC2 KeyPair.
       filter_index: true
       # Uncomment if you wish to store
       # private key to insntance in db.
@@ -39,10 +38,16 @@ classes:
     - name: name
       type: string
       filter_index: true
+
 endpoints:
   create_instance:
-    file: create_instance.js
+    description: Maybe work plz?
+    file: ./src/create_instance.js
     parameters:
+      abc:
+        type: string
+        description: whatever
+        example: whatever
     response:
       mimetype: application/json
       examples:

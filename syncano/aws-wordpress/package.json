@@ -22,7 +22,9 @@
     "chai": "^4.1.2",
     "faker": "^4.1.0",
     "mocha": "^3.5.3",
-    "syncano-test": "^0.3.3"
+    "syncano-test": "^0.3.3",
+    "webpack": "^3.8.1",
+    "webpack-node-externals": "^1.6.0"
   },
   "standard": {
     "globals": [

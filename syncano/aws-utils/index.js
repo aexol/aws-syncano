@@ -1,5 +1,5 @@
 function foo() {
-    return "Hello world!";
+    return "Hello world!!";
 }
 
 export {foo};
