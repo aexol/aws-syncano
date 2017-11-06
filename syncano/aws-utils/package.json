@@ -1,0 +1,9 @@
+{
+  "name": "aws-utils",
+  "version": "0.0.1",
+  "description": "AWS supplementary lib.",
+  "main": "index.js",
+  "author": "Kamil Matysiewicz (kamil@aexol.com)",
+  "license": "MIT",
+  "private": true
+}

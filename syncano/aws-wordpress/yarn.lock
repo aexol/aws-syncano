@@ -127,8 +127,8 @@ asynckit@^0.4.0:
   resolved "https://registry.yarnpkg.com/asynckit/-/asynckit-0.4.0.tgz#c79ed97f7f34cb8f2ba1bc9790bcc366474b4b79"
 
 aws-sdk@^2.142.0:
-  version "2.142.0"
-  resolved "https://registry.yarnpkg.com/aws-sdk/-/aws-sdk-2.142.0.tgz#efdf69d2be3132aa51d4e7abb2c28fe42771e3ec"
+  version "2.143.0"
+  resolved "https://registry.yarnpkg.com/aws-sdk/-/aws-sdk-2.143.0.tgz#751068bd4cf13d3265f6da1b0254903be4bac8ee"
   dependencies:
     buffer "4.9.1"
     crypto-browserify "1.0.9"
@@ -2418,7 +2418,7 @@ sax@>=0.6.0:
   version "1.2.4"
   resolved "https://registry.yarnpkg.com/sax/-/sax-1.2.4.tgz#2816234e2378bddc4e5354fab5caa895df7100d9"
 
-"semver@2 || 3 || 4 || 5", semver@^5.3.0:
+"semver@2 || 3 || 4 || 5", semver@^5.3.0, semver@^5.4.1:
   version "5.4.1"
   resolved "https://registry.yarnpkg.com/semver/-/semver-5.4.1.tgz#e059c09d8571f0540823733433505d3a2f00b18e"
 

@@ -1,0 +1,12 @@
+{
+  "name": "syncano",
+  "version": "0.0.1",
+  "description": "Syncano sockets root.",
+  "main": "index.js",
+  "author": "Kamil Matysiewicz (kamil@aexol.com)",
+  "license": "MIT",
+  "private": true,
+  "dependencies": {
+    "aws-utils": "file:./aws-utils"
+  }
+}
