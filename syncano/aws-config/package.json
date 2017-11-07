@@ -1,0 +1,14 @@
+{
+  "license": "MIT",
+  "scripts": {
+    "preinstall": "if [ \"$(basename $(pwd))\" = \".dist\" ]; then touch yarn.lock && yarn remove aws-utils; else yarn link aws-utils; fi"
+  },
+  "dependencies": {
+    "aws-sdk": "^2.146.0",
+    "semver": "^5.4.1",
+    "syncano-server": "beta"
+  },
+  "devDependencies": {
+    "aws-utils": "file:../aws-utils"
+  }
+}

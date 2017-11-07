@@ -61,7 +61,7 @@ module.exports =
 /******/ 	__webpack_require__.p = "";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 15);
+/******/ 	return __webpack_require__(__webpack_require__.s = 6);
 /******/ })
 /************************************************************************/
 /******/ ([
@@ -143,9 +143,9 @@ const awsDefaultBucket = ctx => `${ctx.meta.instance}-bucket`
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* unused harmony export defaultHash */
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "b", function() { return defaultHash; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return compareHash; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_crypto__ = __webpack_require__(9);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_crypto__ = __webpack_require__(10);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_crypto___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_crypto__);
 
 
@@ -171,22 +171,57 @@ function compareHash(raw, hash) {
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_syncano_server__ = __webpack_require__(0);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_syncano_server___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_syncano_server__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_aws_utils__ = __webpack_require__(7);
+
+
+
+/* harmony default export */ __webpack_exports__["default"] = (async (ctx) => {
+    const {response, data, logger} = __WEBPACK_IMPORTED_MODULE_0_syncano_server___default()(ctx)
+    const {error, debug, info} = logger('aws-config/install')
+    const hashedKey = Object(__WEBPACK_IMPORTED_MODULE_1_aws_utils__["b" /* defaultHash */])(ctx.config.AMAZON_KEY)
+    try {
+        if(!Object(__WEBPACK_IMPORTED_MODULE_1_aws_utils__["a" /* compareHash */])(ctx.args.AMAZON_KEY, hashedKey)) {
+            return response.json({message:"go away"}, 403)
+        }
+        if(ctx.args.AWS_ACCESS_KEY_ID.length === 0 ||
+            ctx.args.AWS_SECRET_ACCESS_KEY.length === 0
+        ) {
+            return response.json({message:"Oops"}, 400)
+        }
+        var aws_id = await data.aws_id.firstOrCreate({}, {})
+        await data.aws_id.update(aws_id.id, {AWS_ACCESS_KEY_ID: ctx.args.AWS_ACCESS_KEY_ID, AWS_SECRET_ACCESS_KEY: ctx.args.AWS_SECRET_ACCESS_KEY})
+        var security = await data.security.firstOrCreate({}, {AMAZON_KEY: hashedKey})
+        return response.json({message: "Installed"}, 200)
+    } catch(e) {
+        return response.json(e, 501)
+    }
+});
+
+
+/***/ }),
+/* 7 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
 /* unused harmony export makeid */
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__aws_config_js__ = __webpack_require__(1);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__default_region_js__ = __webpack_require__(3);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__default_bucket_js__ = __webpack_require__(4);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__default_s3_context_js__ = __webpack_require__(7);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__aws_security_js__ = __webpack_require__(8);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__s3_js__ = __webpack_require__(10);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__default_s3_context_js__ = __webpack_require__(8);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__aws_security_js__ = __webpack_require__(9);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__s3_js__ = __webpack_require__(11);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__utils_js__ = __webpack_require__(5);
 /* unused harmony reexport awsConfig */
 /* unused harmony reexport awsDefaultRegion */
 /* unused harmony reexport awsDefaultBucket */
-/* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return __WEBPACK_IMPORTED_MODULE_3__default_s3_context_js__["awsDefaultS3Context"]; });
-/* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "b", function() { return __WEBPACK_IMPORTED_MODULE_4__aws_security_js__["a"]; });
-/* unused harmony reexport defaultHash */
-/* unused harmony reexport compareHash */
-/* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "c", function() { return __WEBPACK_IMPORTED_MODULE_5__s3_js__["s3"]; });
+/* unused harmony reexport awsDefaultS3Context */
+/* unused harmony reexport isAdmin */
+/* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "b", function() { return __WEBPACK_IMPORTED_MODULE_6__utils_js__["b"]; });
+/* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return __WEBPACK_IMPORTED_MODULE_6__utils_js__["a"]; });
+/* unused harmony reexport s3 */
 
 
 
@@ -209,7 +244,7 @@ function makeid(length) {
 
 
 /***/ }),
-/* 7 */
+/* 8 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -251,11 +286,11 @@ function makeid(length) {
 
 
 /***/ }),
-/* 8 */
+/* 9 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return isAdmin; });
+/* unused harmony export isAdmin */
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_syncano_server__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_syncano_server___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_syncano_server__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__utils_js__ = __webpack_require__(5);
@@ -277,13 +312,13 @@ async function isAdmin(ctx) {
 
 
 /***/ }),
-/* 9 */
+/* 10 */
 /***/ (function(module, exports) {
 
 module.exports = require("crypto");
 
 /***/ }),
-/* 10 */
+/* 11 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -295,64 +330,6 @@ module.exports = require("crypto");
 /* unused harmony default export */ var _unused_webpack_default_export = (({ctx,region}) => {
     const conf = Object(__WEBPACK_IMPORTED_MODULE_1__aws_config__["a" /* awsConfig */])({ctx,region})
     return new __WEBPACK_IMPORTED_MODULE_0_aws_sdk___default.a.S3(conf)
-});
-
-
-/***/ }),
-/* 11 */,
-/* 12 */,
-/* 13 */,
-/* 14 */,
-/* 15 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_syncano_server__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_syncano_server___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_syncano_server__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_aws_utils__ = __webpack_require__(6);
-
-
-
-/* harmony default export */ __webpack_exports__["default"] = (async ctx => {
-  const {data, response} = __WEBPACK_IMPORTED_MODULE_0_syncano_server___default()(ctx)
-  try {
-    const {bucketName, region} = await Object(__WEBPACK_IMPORTED_MODULE_1_aws_utils__["a" /* awsDefaultS3Context */])(ctx)
-    const {name, file} = ctx.args
-    const {user} = ctx.meta
-    if (typeof user === 'undefined') {
-      throw new Error(
-        'You must be logged in to read or upload files to this endpoint'
-      )
-    }
-
-    if(name.indexOf("/") !== -1 ){
-      throw new Error("You are not allowed to do that")
-    }
-    const fileValue = Buffer.from(file.split(',')[1], 'base64')
-    const s3instance = Object(__WEBPACK_IMPORTED_MODULE_1_aws_utils__["c" /* s3 */])({ctx, region})
-    const fullName = `${user.id}/${name}`
-    s3instance.putObject(
-      {
-        Body: fileValue,
-        Bucket: bucketName,
-        Key: fullName,
-        ACL: 'private'
-      },
-      function (err, data) {
-        if (err) {
-          return response.json({err}, 400)
-        } else {
-          return response.json({
-            data,
-            link: `https://s3.${region}.amazonaws.com/${bucketName}/${fullName}`
-          })
-        }
-      }
-    )
-  } catch (error) {
-    return response.json(error.message, 400)
-  }
 });
 
 

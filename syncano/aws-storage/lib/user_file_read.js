@@ -1,5 +1,4 @@
 import Server from 'syncano-server'
-import AWS from 'aws-sdk'
 import {s3, awsDefaultS3Context} from 'aws-utils'
 
 export default async ctx => {

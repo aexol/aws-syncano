@@ -1,0 +1,54 @@
+name: aws-config
+description: Description of aws-config
+version: 0.0.1
+
+config:
+  AMAZON_KEY:
+    description: |
+      Your secret for administrative tasks on AWS sockets.
+      Example: 1je1je9jqw9j891r8wp89rh8p#!$!#4-1341
+    required: true
+classes:
+  aws_id:
+    - name: AWS_ACCESS_KEY_ID
+      type: string
+    - name: AWS_SECRET_ACCESS_KEY
+      type: string
+  security:
+    - name: AMAZON_KEY
+      type: string
+endpoints:
+  install:
+    description: Install AWS config.
+    file: install.js
+    parameters:
+      AMAZON_KEY:
+        type: string
+        description: "Authorize this installation"
+      AWS_ACCESS_KEY_ID:
+        type: string
+        description: "New access key."
+      AWS_SECRET_ACCESS_KEY:
+        description: "New secret access key."
+        type: string
+    response:
+      mimetype: application/json
+      examples:
+        - exit_code: 200
+          description: Successfully installed.
+          example: |
+            {
+              "message": "success"
+            }
+        - exit_code: 400
+          description: Invalid usage
+          example: |
+            {
+              "message": "Oops"
+            }
+        - exit_code: 403
+          description: Forbidden
+          example: |
+            {
+              "message": "go away"
+            }

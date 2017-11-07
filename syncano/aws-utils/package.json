@@ -8,6 +8,7 @@
   "private": true,
   "dependencies": {
     "aws-sdk": "^2.146.0",
-    "semver": "^5.4.1"
+    "semver": "^5.4.1",
+    "syncano-server": "^0.8.5"
   }
 }

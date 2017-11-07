@@ -1,11 +1,11 @@
 import Server from 'syncano-server'
-import {s3} from 'aws-utils'
+import {s3, isAdmin} from 'aws-utils'
 
 export default async ctx => {
   const {data, response} = Server(ctx)
   const {name, region, AMAZON_KEY} = ctx.args
   try {
-    if (AMAZON_KEY !== ctx.config.AMAZON_KEY) {
+    if (!(await isAdmin(ctx))) {
       throw new Error('Bad amazon key')
     }
     const s3instance = s3({ctx, region})

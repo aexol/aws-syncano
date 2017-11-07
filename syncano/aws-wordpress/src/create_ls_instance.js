@@ -61,7 +61,7 @@ module.exports =
 /******/ 	__webpack_require__.p = "";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 5);
+/******/ 	return __webpack_require__(__webpack_require__.s = 6);
 /******/ })
 /************************************************************************/
 /******/ ([
@@ -78,10 +78,21 @@ module.exports = require("syncano-server");
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return awsConfig; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_aws_sdk__ = __webpack_require__(2);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_aws_sdk___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_aws_sdk__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_syncano_server__ = __webpack_require__(0);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_syncano_server___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_syncano_server__);
+
 
 
 function awsConfig({ctx, region}) {
-  const {AWS_ACCESS_KEY_ID, AWS_SECRET_ACCESS_KEY} = ctx.config
+  const {data, logger} = __WEBPACK_IMPORTED_MODULE_1_syncano_server___default()(ctx)
+  const {debug, error, warn, info} = logger('aws-utils@aws-config:')
+  var aws_id;
+  try {
+      aws_id = data.aws_id.firstOrFail()
+  } catch(e) {
+      throw {message: "Please install and configure aws-config socket."}
+  }
+  const {AWS_ACCESS_KEY_ID, AWS_SECRET_ACCESS_KEY} = aws_id
   const creds = new __WEBPACK_IMPORTED_MODULE_0_aws_sdk___default.a.Credentials({
     accessKeyId: AWS_ACCESS_KEY_ID,
     secretAccessKey: AWS_SECRET_ACCESS_KEY
@@ -90,6 +101,7 @@ function awsConfig({ctx, region}) {
     region,
     credentials:creds
   })
+  error(config)
   return config
 }
 
@@ -131,35 +143,27 @@ const awsDefaultBucket = ctx => `${ctx.meta.instance}-bucket`
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_syncano_server__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_syncano_server___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_syncano_server__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_aws_utils__ = __webpack_require__(6);
+/* unused harmony export defaultHash */
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return compareHash; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_crypto__ = __webpack_require__(10);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_crypto___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_crypto__);
 
 
-
-function makeid() {
-  var text = "";
-  var possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
-
-  for (var i = 0; i < 5; i++)
-    text += possible.charAt(Math.floor(Math.random() * possible.length));
-
-  return text;
+function defaultHash(raw) {
+    return __WEBPACK_IMPORTED_MODULE_0_crypto___default.a.createHash("sha256").update(raw).digest("hex") 
 }
 
-/* harmony default export */ __webpack_exports__["default"] = (async (ctx) => {
-    const {response, logger} = __WEBPACK_IMPORTED_MODULE_0_syncano_server___default()(ctx)
-    const {debug, error, warn, info} = logger('aws-wordpress@create_instance:')
-    //if(!ctx.meta.user) {
-    //    response.json({reason: "Well well."}, 401)
-    //    process.exit(0)
-    //}
-    var newLightsailInstance = ctx.instance+"-"+makeid()
-    error(`${newLightsailInstance}`)
-    //response.json(data.lightsail_instances.firstOrCreate())
-    return response.json(__WEBPACK_IMPORTED_MODULE_1_aws_utils__["a" /* awsConfig */]({ctx, region:"eu-central-1"}), 200)
-});
+function compareHash(raw, hash) {
+    if(raw === "undefined") {
+        return false
+    }
+    if(raw.length === 0) {
+        return false
+    }
+    return defaultHash(raw) === hash
+}
+
+
 
 
 /***/ }),
@@ -167,31 +171,68 @@ function makeid() {
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* unused harmony export foo */
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_syncano_server__ = __webpack_require__(0);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_syncano_server___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_syncano_server__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_aws_utils__ = __webpack_require__(7);
+
+
+
+/* harmony default export */ __webpack_exports__["default"] = (async (ctx) => {
+    const {response, logger} = __WEBPACK_IMPORTED_MODULE_0_syncano_server___default()(ctx)
+    if(!(await Object(__WEBPACK_IMPORTED_MODULE_1_aws_utils__["b" /* isAdmin */])(ctx))) {
+        return response.json({message:"Forbidden"}, 403)
+    }
+    const {debug, error, warn, info} = logger('aws-wordpress@create_instance:')
+    var newLightsailInstance = ctx.meta.instance+"-"+Object(__WEBPACK_IMPORTED_MODULE_1_aws_utils__["c" /* makeid */])(5)
+    return response.json(Object(__WEBPACK_IMPORTED_MODULE_1_aws_utils__["a" /* awsConfig */])({ctx: ctx, region: "eu-central-1"}), 200)
+});
+
+
+/***/ }),
+/* 7 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "c", function() { return makeid; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__aws_config_js__ = __webpack_require__(1);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__default_region_js__ = __webpack_require__(3);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__default_bucket_js__ = __webpack_require__(4);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__default_s3_context_js__ = __webpack_require__(7);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__s3_js__ = __webpack_require__(8);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__default_s3_context_js__ = __webpack_require__(8);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__aws_security_js__ = __webpack_require__(9);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__s3_js__ = __webpack_require__(11);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__utils_js__ = __webpack_require__(5);
 /* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return __WEBPACK_IMPORTED_MODULE_0__aws_config_js__["a"]; });
 /* unused harmony reexport awsDefaultRegion */
 /* unused harmony reexport awsDefaultBucket */
 /* unused harmony reexport awsDefaultS3Context */
+/* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "b", function() { return __WEBPACK_IMPORTED_MODULE_4__aws_security_js__["a"]; });
+/* unused harmony reexport defaultHash */
+/* unused harmony reexport compareHash */
 /* unused harmony reexport s3 */
 
 
 
 
 
-function foo() {
-    return "Hello world!!";
+
+
+
+function makeid(length) {
+  var text = "";
+  var possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+
+  for (var i = 0; i < length; i++)
+    text += possible.charAt(Math.floor(Math.random() * possible.length));
+
+  return text;
 }
 
 
 
 
 /***/ }),
-/* 7 */
+/* 8 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -233,7 +274,39 @@ function foo() {
 
 
 /***/ }),
-/* 8 */
+/* 9 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return isAdmin; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_syncano_server__ = __webpack_require__(0);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_syncano_server___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_syncano_server__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__utils_js__ = __webpack_require__(5);
+
+
+
+async function isAdmin(ctx) {
+    const {data} = __WEBPACK_IMPORTED_MODULE_0_syncano_server___default()(ctx)
+    var security
+    try {
+        security = await data.security.firstOrFail()
+    } catch(e) {
+        throw {message: "Please install and configure aws-config socket."}
+    }
+    return Object(__WEBPACK_IMPORTED_MODULE_1__utils_js__["a" /* compareHash */])(ctx.args.AMAZON_KEY, security.AMAZON_KEY)
+}
+
+
+
+
+/***/ }),
+/* 10 */
+/***/ (function(module, exports) {
+
+module.exports = require("crypto");
+
+/***/ }),
+/* 11 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";

@@ -1,25 +1,12 @@
 import Server from 'syncano-server';
-import * as awsUtils from 'aws-utils';
-
-function makeid() {
-  var text = "";
-  var possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
-
-  for (var i = 0; i < 5; i++)
-    text += possible.charAt(Math.floor(Math.random() * possible.length));
-
-  return text;
-}
+import {awsConfig, isAdmin, makeid} from 'aws-utils';
 
 export default async (ctx) => {
     const {response, logger} = Server(ctx)
+    if(!(await isAdmin(ctx))) {
+        return response.json({message:"Forbidden"}, 403)
+    }
     const {debug, error, warn, info} = logger('aws-wordpress@create_instance:')
-    //if(!ctx.meta.user) {
-    //    response.json({reason: "Well well."}, 401)
-    //    process.exit(0)
-    //}
-    var newLightsailInstance = ctx.instance+"-"+makeid()
-    error(`${newLightsailInstance}`)
-    //response.json(data.lightsail_instances.firstOrCreate())
-    return response.json(awsUtils.awsConfig({ctx, region:"eu-central-1"}), 200)
+    var newLightsailInstance = ctx.meta.instance+"-"+makeid(5)
+    return response.json(awsConfig({ctx: ctx, region: "eu-central-1"}), 200)
 }

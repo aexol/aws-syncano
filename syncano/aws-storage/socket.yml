@@ -3,21 +3,6 @@ description: Description of aws-storage
 version: 0.0.1
 
 config:
-  AWS_ACCESS_KEY_ID:
-    description: |
-      Your acces key for configuration options
-      Example: 1je1je9jqw9j891r8wp89rh8p#!$!#4-1341
-    required: true
-  AWS_SECRET_ACCESS_KEY:
-    description: |
-      Your secret key for configuration options
-      Example: 1je1je9jqw9j891r8wp89rh8p#!$!#4-1341
-    required: true
-  AMAZON_KEY:
-    description: |
-      Your secret key for creating buckets
-      Example: 1je1je9jqw9j891r8wp89rh8p#!$!#4-1341
-    required: true
   REGION:
     description: |
       Amazon region
