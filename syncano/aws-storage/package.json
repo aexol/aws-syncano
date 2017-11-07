@@ -1,11 +1,11 @@
 {
   "license": "MIT",
   "dependencies": {
-    "aws-sdk": "^2.142.0",
-    "crypto": "^1.0.1",
+    "aws-sdk": "^2.146.0",
     "syncano-server": "1.0.1-13"
   },
   "scripts": {
+    "preinstall": "if [ \"$(basename $(pwd))\" = \".dist\" ]; then touch yarn.lock && yarn remove aws-utils; else yarn link aws-utils; fi",
     "test": "yarn  && npm run test:lint && npm run test:e2e:coverage",
     "test:e2e-single": "cross-env NODE_ENV=test mocha -s 1800 --reporter spec --require babel-register --timeout 10000",
     "test:e2e-single:coverage": "nyc --produce-source-map=true cross-env NODE_ENV=test mocha -s 1800 --reporter spec --require babel-register --timeout 4000",
@@ -14,6 +14,7 @@
     "test:lint": "standard --fix"
   },
   "devDependencies": {
+    "aws-utils": "file:../aws-utils",
     "babel-core": "^6.26.0",
     "babel-preset-es2015": "^6.24.1",
     "babel-preset-stage-0": "^6.24.1",

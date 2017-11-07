@@ -1,78 +1,44 @@
 name: aws-wordpress
 description: Description of aws-wordpress
 version: 0.0.1
-config:
-  AWS_ACCESS_KEY_ID:
-    description: |
-      Your acces key for configuration options
-      Example: 1je1je9jqw9j891r8wp89rh8p#!$!#4-1341
-    required: true
-  AWS_SECRET_ACCESS_KEY:
-    description: |
-      Your secret key for configuration options
-      Example: 1je1je9jqw9j891r8wp89rh8p#!$!#4-1341
-    required: true
-  AMAZON_KEY:
-    description: |
-      Your secret key for creating buckets
-      Example: 1je1je9jqw9j891r8wp89rh8p#!$!#4-1341
-    required: true
-  REGION:
-    description: |
-      Amazon region
-      Example: eu-central-1
+
+#config:
+#  AWS_ACCESS_KEY_ID:
+#    description: |
+#      Your acces key for configuration options
+#      Example: 1je1je9jqw9j891r8wp89rh8p#!$!#4-1341
+#    required: true
+#  AWS_SECRET_ACCESS_KEY:
+#    description: |
+#      Your secret key for configuration options
+#      Example: 1je1je9jqw9j891r8wp89rh8p#!$!#4-1341
+#    required: true
+#  AMAZON_KEY:
+#    description: |
+#      Your secret key for creating buckets
+#      Example: 1je1je9jqw9j891r8wp89rh8p#!$!#4-1341
+#    required: true
+#  REGION:
+#    description: |
+#      Amazon region
+#      Example: eu-central-1
 
 classes:
   keypairs:
     - name: name
       type: string
       filter_index: true
-      # Uncomment if you wish to store
-      # private key to insntance in db.
-      # - name: key
-      #   type: string
-      #   description: |
-      #     Private key value of EC2 KeyPair
-      #   filter_index: false
   lightsail_instances:
     - name: name
       type: string
       filter_index: true
 
 endpoints:
-  create_instance:
-    description: Maybe work plz?
-    file: ./src/create_instance.js
+  create_ls_instance:
+    description: Maybe work plz
+    file: create_ls_instance.js
     parameters:
       abc:
         type: string
         description: whatever
         example: whatever
-    response:
-      mimetype: application/json
-      examples:
-        - exit_code: 200
-          description: Woop woop.
-          example: |
-            {
-              "instance_name": "new-instance",
-              "private_key": "base64 encoded ssh private key"
-            }
-        - exit_code: 400
-          description: RTFM.
-          example: |
-            {
-              "reason":"Well whatevver."
-            }
-        - exit_code: 401
-          description: Who art thou?
-          example: |
-            {
-              "reason":"Well whatevver."
-            }
-        - exit_code: 403
-          description: You shall not pass.
-          example: |
-            {
-              "reason":"Well whatevver."
-            }

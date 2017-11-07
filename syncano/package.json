@@ -1,0 +1,32 @@
+{
+  "name": "syncano",
+  "version": "0.0.1",
+  "description": "AWS endpoints syncano",
+  "main": "index.js",
+  "license": "MIT",
+  "watch": {
+    "pack-utils": {
+      "patterns": [
+        "*/lib/*.js",
+        "aws-utils/*.js",
+        "aws-utils/package.json"
+      ]
+    }
+  },
+  "scripts": {
+    "preinstall": "node scripts/preinstall_subsockets.js",
+    "postinstall": "node scripts/postinstall_subsockets.js",
+    "pack-utils": "node scripts/pack.js",
+    "deploy": "npx s deploy",
+    "hot": "concurrently \"npx s hot\" \"npm-watch pack-utils\""
+  },
+  "devDependencies": {
+    "concurrently": "^3.5.0",
+    "npm-watch": "^0.3.0",
+    "syncano-cli": "^0.53.0",
+    "webpack": "^3.8.1",
+    "webpack-node-externals": "^1.6.0",
+    "wrapper-webpack-plugin": "^1.0.0"
+  },
+  "dependencies": {}
+}
