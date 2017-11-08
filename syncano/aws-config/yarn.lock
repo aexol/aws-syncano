@@ -6,9 +6,17 @@ asynckit@^0.4.0:
   version "0.4.0"
   resolved "https://registry.yarnpkg.com/asynckit/-/asynckit-0.4.0.tgz#c79ed97f7f34cb8f2ba1bc9790bcc366474b4b79"
 
-aws-sdk@^2.146.0:
-  version "2.146.0"
-  resolved "https://registry.yarnpkg.com/aws-sdk/-/aws-sdk-2.146.0.tgz#e2d75585a030dae116ae32cbf42c496688d04efb"
+aws-bluebird@^1.0.0:
+  version "1.0.0"
+  resolved "http://localhost:4873/aws-bluebird/-/aws-bluebird-1.0.0.tgz#8e8f2ded3450f9b9e667a175a8b63b5d56c75a8e"
+  dependencies:
+    aws-sdk "^2.2.3"
+    bluebird "^2.10.0"
+    debug "^2.2.0"
+
+aws-sdk@^2.2.3:
+  version "2.147.0"
+  resolved "http://localhost:4873/aws-sdk/-/aws-sdk-2.147.0.tgz#a0d168ad1f8fd5d15ee9bb537fdddfdf63a205c1"
   dependencies:
     buffer "4.9.1"
     crypto-browserify "1.0.9"
@@ -21,31 +29,28 @@ aws-sdk@^2.146.0:
     xml2js "0.4.17"
     xmlbuilder "4.2.1"
 
-"aws-utils@file:../aws-utils":
-  version "0.0.1"
-  dependencies:
-    aws-sdk "^2.146.0"
-    semver "^5.4.1"
-    syncano-server "^0.8.5"
-
 babel-runtime@^6.11.6:
   version "6.26.0"
-  resolved "https://registry.yarnpkg.com/babel-runtime/-/babel-runtime-6.26.0.tgz#965c7058668e82b55d7bfe04ff2337bc8b5647fe"
+  resolved "http://localhost:4873/babel-runtime/-/babel-runtime-6.26.0.tgz#965c7058668e82b55d7bfe04ff2337bc8b5647fe"
   dependencies:
     core-js "^2.4.0"
     regenerator-runtime "^0.11.0"
 
 base64-js@^1.0.2:
   version "1.2.1"
-  resolved "https://registry.yarnpkg.com/base64-js/-/base64-js-1.2.1.tgz#a91947da1f4a516ea38e5b4ec0ec3773675e0886"
+  resolved "http://localhost:4873/base64-js/-/base64-js-1.2.1.tgz#a91947da1f4a516ea38e5b4ec0ec3773675e0886"
+
+bluebird@^2.10.0:
+  version "2.11.0"
+  resolved "http://localhost:4873/bluebird/-/bluebird-2.11.0.tgz#534b9033c022c9579c56ba3b3e5a5caafbb650e1"
 
 buffer-to-arraybuffer@0.0.4:
   version "0.0.4"
-  resolved "https://registry.yarnpkg.com/buffer-to-arraybuffer/-/buffer-to-arraybuffer-0.0.4.tgz#f3e5e3f6f2632c71e7cdebe76ed1718fad421d4c"
+  resolved "http://localhost:4873/buffer-to-arraybuffer/-/buffer-to-arraybuffer-0.0.4.tgz#f3e5e3f6f2632c71e7cdebe76ed1718fad421d4c"
 
 buffer@4.9.1:
   version "4.9.1"
-  resolved "https://registry.yarnpkg.com/buffer/-/buffer-4.9.1.tgz#6d1bb601b07a4efced97094132093027c95bc298"
+  resolved "http://localhost:4873/buffer/-/buffer-4.9.1.tgz#6d1bb601b07a4efced97094132093027c95bc298"
   dependencies:
     base64-js "^1.0.2"
     ieee754 "^1.1.4"
@@ -59,11 +64,17 @@ combined-stream@^1.0.5:
 
 core-js@^2.4.0:
   version "2.5.1"
-  resolved "https://registry.yarnpkg.com/core-js/-/core-js-2.5.1.tgz#ae6874dc66937789b80754ff5428df66819ca50b"
+  resolved "http://localhost:4873/core-js/-/core-js-2.5.1.tgz#ae6874dc66937789b80754ff5428df66819ca50b"
 
 crypto-browserify@1.0.9:
   version "1.0.9"
-  resolved "https://registry.yarnpkg.com/crypto-browserify/-/crypto-browserify-1.0.9.tgz#cc5449685dfb85eb11c9828acc7cb87ab5bbfcc0"
+  resolved "http://localhost:4873/crypto-browserify/-/crypto-browserify-1.0.9.tgz#cc5449685dfb85eb11c9828acc7cb87ab5bbfcc0"
+
+debug@^2.2.0:
+  version "2.6.9"
+  resolved "http://localhost:4873/debug/-/debug-2.6.9.tgz#5d128515df134ff327e90a4c93f4e077a536341f"
+  dependencies:
+    ms "2.0.0"
 
 delayed-stream@~1.0.0:
   version "1.0.0"
@@ -71,13 +82,13 @@ delayed-stream@~1.0.0:
 
 encoding@^0.1.11:
   version "0.1.12"
-  resolved "https://registry.yarnpkg.com/encoding/-/encoding-0.1.12.tgz#538b66f3ee62cd1ab51ec323829d1f9480c74beb"
+  resolved "http://localhost:4873/encoding/-/encoding-0.1.12.tgz#538b66f3ee62cd1ab51ec323829d1f9480c74beb"
   dependencies:
     iconv-lite "~0.4.13"
 
 events@^1.1.1:
   version "1.1.1"
-  resolved "https://registry.yarnpkg.com/events/-/events-1.1.1.tgz#9ebdb7635ad099c70dcc4c2a1f5004288e8bd924"
+  resolved "http://localhost:4873/events/-/events-1.1.1.tgz#9ebdb7635ad099c70dcc4c2a1f5004288e8bd924"
 
 form-data@^2.1.4, form-data@^2.3.1:
   version "2.3.1"
@@ -89,23 +100,31 @@ form-data@^2.1.4, form-data@^2.3.1:
 
 iconv-lite@~0.4.13:
   version "0.4.19"
-  resolved "https://registry.yarnpkg.com/iconv-lite/-/iconv-lite-0.4.19.tgz#f7468f60135f5e5dad3399c0a81be9a1603a082b"
+  resolved "http://localhost:4873/iconv-lite/-/iconv-lite-0.4.19.tgz#f7468f60135f5e5dad3399c0a81be9a1603a082b"
 
 ieee754@^1.1.4:
   version "1.1.8"
-  resolved "https://registry.yarnpkg.com/ieee754/-/ieee754-1.1.8.tgz#be33d40ac10ef1926701f6f08a2d86fbfd1ad3e4"
+  resolved "http://localhost:4873/ieee754/-/ieee754-1.1.8.tgz#be33d40ac10ef1926701f6f08a2d86fbfd1ad3e4"
 
 is-stream@^1.0.1:
   version "1.1.0"
-  resolved "https://registry.yarnpkg.com/is-stream/-/is-stream-1.1.0.tgz#12d4a3dd4e68e0b79ceb8dbc84173ae80d91ca44"
+  resolved "http://localhost:4873/is-stream/-/is-stream-1.1.0.tgz#12d4a3dd4e68e0b79ceb8dbc84173ae80d91ca44"
 
 isarray@^1.0.0:
   version "1.0.0"
-  resolved "https://registry.yarnpkg.com/isarray/-/isarray-1.0.0.tgz#bb935d48582cba168c06834957a54a3e07124f11"
+  resolved "http://localhost:4873/isarray/-/isarray-1.0.0.tgz#bb935d48582cba168c06834957a54a3e07124f11"
 
 jmespath@0.15.0:
   version "0.15.0"
-  resolved "https://registry.yarnpkg.com/jmespath/-/jmespath-0.15.0.tgz#a3f222a9aae9f966f5d27c796510e28091764217"
+  resolved "http://localhost:4873/jmespath/-/jmespath-0.15.0.tgz#a3f222a9aae9f966f5d27c796510e28091764217"
+
+local-aws-utils@^0.0.1:
+  version "0.0.1"
+  resolved "http://localhost:4873/local-aws-utils/-/local-aws-utils-0.0.1.tgz#09f5e29deb142b3979e90d201b133a097d7283a9"
+  dependencies:
+    aws-bluebird "^1.0.0"
+    semver "^5.4.1"
+    syncano-server "^0.8.5"
 
 lodash.get@^4.4.2:
   version "4.4.2"
@@ -121,7 +140,7 @@ lodash.set@^4.3.2:
 
 lodash@^4.0.0:
   version "4.17.4"
-  resolved "https://registry.yarnpkg.com/lodash/-/lodash-4.17.4.tgz#78203a4d1c328ae1d86dca6460e369b57f4055ae"
+  resolved "http://localhost:4873/lodash/-/lodash-4.17.4.tgz#78203a4d1c328ae1d86dca6460e369b57f4055ae"
 
 mime-db@~1.30.0:
   version "1.30.0"
@@ -133,9 +152,13 @@ mime-types@^2.1.12:
   dependencies:
     mime-db "~1.30.0"
 
+ms@2.0.0:
+  version "2.0.0"
+  resolved "http://localhost:4873/ms/-/ms-2.0.0.tgz#5608aeadfc00be6c2901df5f9861788de0d597c8"
+
 node-fetch@2.0.0-alpha.3:
   version "2.0.0-alpha.3"
-  resolved "https://registry.yarnpkg.com/node-fetch/-/node-fetch-2.0.0-alpha.3.tgz#8031bded671c806e4604c16b27ab1973b4fe88cc"
+  resolved "http://localhost:4873/node-fetch/-/node-fetch-2.0.0-alpha.3.tgz#8031bded671c806e4604c16b27ab1973b4fe88cc"
   dependencies:
     babel-runtime "^6.11.6"
     buffer-to-arraybuffer "0.0.4"
@@ -148,31 +171,31 @@ node-fetch@2.0.0-alpha.9:
 
 punycode@1.3.2:
   version "1.3.2"
-  resolved "https://registry.yarnpkg.com/punycode/-/punycode-1.3.2.tgz#9653a036fb7c1ee42342f2325cceefea3926c48d"
+  resolved "http://localhost:4873/punycode/-/punycode-1.3.2.tgz#9653a036fb7c1ee42342f2325cceefea3926c48d"
 
 querystring@0.2.0:
   version "0.2.0"
-  resolved "https://registry.yarnpkg.com/querystring/-/querystring-0.2.0.tgz#b209849203bb25df820da756e747005878521620"
+  resolved "http://localhost:4873/querystring/-/querystring-0.2.0.tgz#b209849203bb25df820da756e747005878521620"
 
 regenerator-runtime@^0.11.0:
   version "0.11.0"
-  resolved "https://registry.yarnpkg.com/regenerator-runtime/-/regenerator-runtime-0.11.0.tgz#7e54fe5b5ccd5d6624ea6255c3473be090b802e1"
+  resolved "http://localhost:4873/regenerator-runtime/-/regenerator-runtime-0.11.0.tgz#7e54fe5b5ccd5d6624ea6255c3473be090b802e1"
 
 sax@1.2.1:
   version "1.2.1"
-  resolved "https://registry.yarnpkg.com/sax/-/sax-1.2.1.tgz#7b8e656190b228e81a66aea748480d828cd2d37a"
+  resolved "http://localhost:4873/sax/-/sax-1.2.1.tgz#7b8e656190b228e81a66aea748480d828cd2d37a"
 
 sax@>=0.6.0:
   version "1.2.4"
-  resolved "https://registry.yarnpkg.com/sax/-/sax-1.2.4.tgz#2816234e2378bddc4e5354fab5caa895df7100d9"
+  resolved "http://localhost:4873/sax/-/sax-1.2.4.tgz#2816234e2378bddc4e5354fab5caa895df7100d9"
 
 semver@^5.4.1:
   version "5.4.1"
-  resolved "https://registry.yarnpkg.com/semver/-/semver-5.4.1.tgz#e059c09d8571f0540823733433505d3a2f00b18e"
+  resolved "http://localhost:4873/semver/-/semver-5.4.1.tgz#e059c09d8571f0540823733433505d3a2f00b18e"
 
 syncano-server@^0.8.5:
   version "0.8.5"
-  resolved "https://registry.yarnpkg.com/syncano-server/-/syncano-server-0.8.5.tgz#ac4691ccf0590553518273052ec032a14b387f53"
+  resolved "http://localhost:4873/syncano-server/-/syncano-server-0.8.5.tgz#ac4691ccf0590553518273052ec032a14b387f53"
   dependencies:
     form-data "^2.1.4"
     lodash.get "^4.4.2"
@@ -192,24 +215,24 @@ syncano-server@beta:
 
 url@0.10.3:
   version "0.10.3"
-  resolved "https://registry.yarnpkg.com/url/-/url-0.10.3.tgz#021e4d9c7705f21bbf37d03ceb58767402774c64"
+  resolved "http://localhost:4873/url/-/url-0.10.3.tgz#021e4d9c7705f21bbf37d03ceb58767402774c64"
   dependencies:
     punycode "1.3.2"
     querystring "0.2.0"
 
 uuid@3.1.0:
   version "3.1.0"
-  resolved "https://registry.yarnpkg.com/uuid/-/uuid-3.1.0.tgz#3dd3d3e790abc24d7b0d3a034ffababe28ebbc04"
+  resolved "http://localhost:4873/uuid/-/uuid-3.1.0.tgz#3dd3d3e790abc24d7b0d3a034ffababe28ebbc04"
 
 xml2js@0.4.17:
   version "0.4.17"
-  resolved "https://registry.yarnpkg.com/xml2js/-/xml2js-0.4.17.tgz#17be93eaae3f3b779359c795b419705a8817e868"
+  resolved "http://localhost:4873/xml2js/-/xml2js-0.4.17.tgz#17be93eaae3f3b779359c795b419705a8817e868"
   dependencies:
     sax ">=0.6.0"
     xmlbuilder "^4.1.0"
 
 xmlbuilder@4.2.1, xmlbuilder@^4.1.0:
   version "4.2.1"
-  resolved "https://registry.yarnpkg.com/xmlbuilder/-/xmlbuilder-4.2.1.tgz#aa58a3041a066f90eaa16c2f5389ff19f3f461a5"
+  resolved "http://localhost:4873/xmlbuilder/-/xmlbuilder-4.2.1.tgz#aa58a3041a066f90eaa16c2f5389ff19f3f461a5"
   dependencies:
     lodash "^4.0.0"

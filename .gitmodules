@@ -1,0 +1,3 @@
+[submodule "syncano/aws-utils"]
+	path = syncano/aws-utils
+	url = https://gitlab.com/Aexol/aws-utils.git

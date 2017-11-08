@@ -4,29 +4,43 @@
   "description": "AWS endpoints syncano",
   "main": "index.js",
   "license": "MIT",
-  "watch": {
-    "pack-utils": {
-      "patterns": [
-        "*/lib/*.js",
-        "aws-utils/*.js",
-        "aws-utils/package.json"
-      ]
-    }
-  },
   "scripts": {
-    "preinstall": "node scripts/preinstall_subsockets.js",
-    "postinstall": "node scripts/postinstall_subsockets.js",
-    "pack-utils": "node scripts/pack.js",
-    "deploy": "npx s deploy",
-    "hot": "concurrently \"npx s hot\" \"npm-watch pack-utils\""
+    "start_sinopia": "node scripts/start_sinopia.js",
+    "stop_sinopia": "node scripts/stop_sinopia.js",
+    "deploy": "npm run build && yarn start_sinopia && npx s deploy && yarn stop_sinopia",
+    "prepublish": "npm run build",
+    "prebuild": "rimraf ./aws-utils/lib",
+    "precommit": "lint-staged",
+    "build": "babel ./aws-utils/src --out-dir ./aws-utils/lib",
+    "lint": "standard --fix --env mocha --parser babel-eslint **/src/**/* ",
+    "format": "prettier --write --single-quote --no-semi --no-bracket-spacing *.js {src,test}/**/*.js"
+  },
+  "lint-staged": {
+    "*.js": [
+      "npm run lint",
+      "npm run format",
+      "git add"
+    ]
   },
   "devDependencies": {
+    "babel-cli": "^6.26.0",
+    "babel-eslint": "^8.0.1",
+    "babel-plugin-add-module-exports": "^0.2.1",
+    "babel-plugin-transform-class-properties": "^6.24.1",
+    "babel-plugin-transform-export-extensions": "^6.22.0",
+    "babel-plugin-transform-object-rest-spread": "^6.22.0",
+    "babel-plugin-transform-strict-mode": "^6.24.1",
+    "babel-preset-env": "^1.6.0",
+    "babel-register": "^6.26.0",
     "concurrently": "^3.5.0",
-    "npm-watch": "^0.3.0",
-    "syncano-cli": "^0.53.0",
-    "webpack": "^3.8.1",
-    "webpack-node-externals": "^1.6.0",
-    "wrapper-webpack-plugin": "^1.0.0"
-  },
-  "dependencies": {}
+    "lint-staged": "^4.2.3",
+    "nodemon": "^1.12.1",
+    "prettier": "^1.7.4",
+    "ps-node": "^0.1.6",
+    "rimraf": "^2.6.2",
+    "sinopia": "^1.4.0",
+    "sleep": "^5.1.1",
+    "standard": "^10.0.3",
+    "syncano-cli": "^0.53.0"
+  }
 }
