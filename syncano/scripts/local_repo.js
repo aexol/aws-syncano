@@ -28,15 +28,19 @@ function startIfNotRuning(pid) {
     }
 }
 
+function unpublish(cb) {
+    var unpublish = spawn('npm', ['unpublish', '--force', `--registry=${registry}`], {cwd: 'aws-utils', stdio: ['ignore', 'ignore', 'ignore']})
+    unpublish.on('close', (code, signal) => {
+        cb()
+    })
+}
+
 function stopIfRunning(pid) {
     if(pid !== -1) {
-        npmLogin(() => {
-            var unpublish = spawn('npm', ['unpublish', '--force', `--registry=${registry}`], {cwd: 'aws-utils', stdio: ['pipe', process.stdout, process.stdin]})
-            unpublish.on('close', (code, signal) => {
-                kill(pid)
-                unlinkSync(sinopiaPidFile)
-            })
-        })
+        npmLogin(() => unpublish(() => {
+            kill(pid)
+            unlinkSync(sinopiaPidFile)
+        }))
     }
 }
 
@@ -66,34 +70,41 @@ function stopSinopia() {
 }
 
 function npmLogin(cb) {
-    var login = spawn('npm', ['login', `--registry=${registry}`, '--always-auth'], {stdio: ['pipe', process.stdout, process.stderr]})
-    login.stdin.write('aaaa\naaaa\nabc@def.ghi\n')
-    login.on('close', (code, signal) => {
-        if(code != 0) {
-            var adduser = spawn('npm', ['adduser', `--registry=${registry}`, '--always-auth'], {stdio: ['pipe', process.stdout, process.stderr]})
-            adduser.stdin.write('aaaa\naaaa\nabc@def.ghi\n')
-            adduser.on('close', (code, signal) => {
-                if(code != 0) {
-                    process.exit(code)
-                }
-                cb()
-            })
-            adduser.stdin.end()
-        } else {
+    var whoami = spawn('npm', ['whoami', `--registry=${registry}`, '--always-auth'], {stdio: ['ignore', 'ignore', 'ignore']})
+    whoami.on('close', (code, signal) => {
+        if(code == 0) {
             cb()
+            return
         }
+        var login = spawn('npm', ['login', `--registry=${registry}`, '--always-auth'], {stdio: ['pipe', process.stdout, process.stderr]})
+        login.stdin.write('aaaa\naaaa\nabc@def.ghi\n')
+        login.on('close', (code, signal) => {
+            if(code != 0) {
+                var adduser = spawn('npm', ['adduser', `--registry=${registry}`, '--always-auth'], {stdio: ['pipe', process.stdout, process.stderr]})
+                adduser.stdin.write('aaaa\naaaa\nabc@def.ghi\n')
+                adduser.on('close', (code, signal) => {
+                    if(code != 0) {
+                        process.exit(code)
+                    }
+                    cb()
+                })
+                adduser.stdin.end()
+            } else {
+                cb()
+            }
+        })
+        login.stdin.end()
     })
-    login.stdin.end()
 }
 
 
-function publish() {
+function publish(cb) {
     var publish = spawn('npm', ['publish', `--registry=${registry}`], {cwd: 'aws-utils'})
     publish.on('close', (code, signal) => {
         if(code != 0) {
             process.exit(code)
         }
-        syncUtilsInSockets()
+        cb()
     })
 }
 
@@ -120,4 +131,6 @@ module.exports.startSinopia = startSinopia
 module.exports.stopSinopia = stopSinopia
 module.exports.npmLogin = npmLogin
 module.exports.publish = publish
+module.exports.unpublish = unpublish
+module.exports.syncUtilsInSockets = syncUtilsInSockets
 module.exports.withSinopiaPid = withSinopiaPid

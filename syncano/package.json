@@ -7,8 +7,10 @@
   "scripts": {
     "start_sinopia": "node scripts/start_sinopia.js",
     "stop_sinopia": "node scripts/stop_sinopia.js",
-    "deploy": "npm run build && yarn start_sinopia && npx s deploy && yarn stop_sinopia",
-    "prepublish": "npm run build",
+    "unpublish": "node scripts/unpublish.js",
+    "deploy": "yarn build && yarn start_sinopia && npx s deploy && yarn unpublish",
+    "hot": "npx s hot",
+    "prepublish": "yarn build",
     "prebuild": "rimraf ./aws-utils/lib",
     "precommit": "lint-staged",
     "build": "babel ./aws-utils/src --out-dir ./aws-utils/lib",
@@ -17,8 +19,8 @@
   },
   "lint-staged": {
     "*.js": [
-      "npm run lint",
-      "npm run format",
+      "yarn lint",
+      "yarn format",
       "git add"
     ]
   },
