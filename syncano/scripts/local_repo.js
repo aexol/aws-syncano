@@ -17,10 +17,11 @@ const sinopiaPidFile = join(projectPath, '.sinopia')
 
 function startIfNotRuning(pid) {
     if(pid === -1) {
-        const sinopia = spawn('npx', ['sinopia'], {detached: true, stdio: ['ignore', 'ignore', process.stdin]})
+        const sinopia = spawn('npx', ['sinopia'], {detached: true, stdio: ['ignore', 'ignore', 'ignore']})
         sinopia.unref()
         sinopia.on('close', (code) => {
             if(code != 0) {
+                console.log(`Sinopia exited with ${code}`)
                 process.exit(code)
             }
         })
@@ -31,6 +32,9 @@ function startIfNotRuning(pid) {
 function unpublish(cb) {
     var unpublish = spawn('npm', ['unpublish', '--force', `--registry=${registry}`], {cwd: 'aws-utils', stdio: ['ignore', 'ignore', 'ignore']})
     unpublish.on('close', (code, signal) => {
+        if(code != 0) {
+            console.log(`npm unpublish exited with ${code}`)
+        }
         cb()
     })
 }
@@ -84,6 +88,7 @@ function npmLogin(cb) {
                 adduser.stdin.write('aaaa\naaaa\nabc@def.ghi\n')
                 adduser.on('close', (code, signal) => {
                     if(code != 0) {
+                        console.log(`npm adduser exited with ${code}`)
                         process.exit(code)
                     }
                     cb()
@@ -99,12 +104,18 @@ function npmLogin(cb) {
 
 
 function publish(cb) {
-    var publish = spawn('npm', ['publish', `--registry=${registry}`], {cwd: 'aws-utils'})
-    publish.on('close', (code, signal) => {
-        if(code != 0) {
-            process.exit(code)
+    var bumpPatch = spawn('npm', ['version', 'patch'], {cwd: 'aws-utils'})
+    bumpPatch.on('close', (code, signal) => {
+        if(code == 0) {
+            var publish = spawn('npm', ['publish', `--registry=${registry}`], {cwd: 'aws-utils'})
+            publish.on('close', (code, signal) => {
+                if(code != 0) {
+                    console.log(`npm publish exited with ${code}`)
+                    process.exit(code)
+                }
+                cb()
+            })
         }
-        cb()
     })
 }
 
@@ -116,12 +127,12 @@ function syncUtilsInSockets() {
             mkdirSync(sockDistDir)
         }
         writeFileSync(join(sockDistDir, '.yarnrc'), `registry "${registry}"\n`)
-        copyFileSync(join(sockets[i], 'package.json'), join(sockDistDir, 'package.json'))
+        //copyFileSync(join(sockets[i], 'package.json'), join(sockDistDir, 'package.json'))
         rmdir.sync(join(sockDistDir, 'node_modules', 'local-aws-utils'))
-        var yarnProd = spawn('yarn', ['install', '--check-files', '--no-progress', '--production', `--registry=${registry}`], {cwd: sockDistDir, stdio: ['ignore', process.stdout, process.stdin]})
+        var yarnProd = spawn('yarn', ['upgrade', '--prefer-offline', '-L', 'local-aws-utils', `--registry=${registry}`], {cwd: sockets[i], stdio: ['ignore', 'ignore', process.stderr]})
         yarnProd.on('close', (code, signal) => {
             if(code != 0) {
-                console.log(code)
+                console.log(`yarn upgrade local-aws-utils exited with: ${code}`)
             }
         })
     }

@@ -1,7 +1,7 @@
 {
   "license": "MIT",
   "dependencies": {
-    "local-aws-utils": "^0.0.1",
+    "local-aws-utils": "^0.0.42",
     "syncano-server": "1.0.1-13"
   },
   "scripts": {
@@ -17,7 +17,7 @@
     "babel-preset-stage-0": "^6.24.1",
     "chai": "^4.1.2",
     "faker": "^4.1.0",
-    "mocha": "^3.5.3",
+    "mocha": "^4.0.1",
     "syncano-test": "^0.3.3"
   },
   "standard": {

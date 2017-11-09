@@ -2,7 +2,8 @@ import Server from 'syncano-server'
 import {defaultHash, compareHash, ErrorWithCode} from 'local-aws-utils'
 
 export default async (ctx) => {
-  const {response, data, logger} = Server(ctx)
+  const server = Server(ctx)
+  const {response, data, logger} = server
   const {error} = logger('aws-config/install')
   const hashedKey = defaultHash(ctx.config.AMAZON_KEY)
   try {

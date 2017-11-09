@@ -2,7 +2,8 @@ import Server from 'syncano-server'
 import {S3, awsDefaultS3Context} from 'local-aws-utils'
 
 export default async ctx => {
-  const {data, response} = Server(ctx)
+  const server = Server(ctx)
+  const {data, response} = server
   try {
     const {bucketName, region} = await awsDefaultS3Context(ctx)
     const {name, file} = ctx.args
@@ -17,7 +18,7 @@ export default async ctx => {
       throw new Error('You are not allowed to do that')
     }
     const fileValue = Buffer.from(file.split(',')[1], 'base64')
-    const s3instance = S3({ctx, region})
+    const s3instance = S3(ctx, server, region)
     const fullName = `${user.id}/${name}`
     const res = await s3instance.putObject(
       {

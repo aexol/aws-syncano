@@ -2,7 +2,7 @@
   "license": "MIT",
   "scripts": {},
   "dependencies": {
-    "local-aws-utils": "^0.0.1",
+    "local-aws-utils": "^0.0.42",
     "syncano-server": "beta"
   },
   "devDependencies": {}

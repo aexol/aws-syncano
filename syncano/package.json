@@ -8,7 +8,7 @@
     "start_sinopia": "node scripts/start_sinopia.js",
     "stop_sinopia": "node scripts/stop_sinopia.js",
     "unpublish": "node scripts/unpublish.js",
-    "deploy": "yarn build && yarn start_sinopia && npx s deploy && yarn unpublish",
+    "deploy": "yarn build && yarn start_sinopia && npx s deploy",
     "hot": "npx s hot",
     "prepublish": "yarn build",
     "prebuild": "rimraf ./aws-utils/lib",

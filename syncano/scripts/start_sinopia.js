@@ -4,7 +4,7 @@ const {sleep} = require('sleep');
 startSinopia()
 var pub = () => {
     publish(() => {
-        syncUtilsInSockets
+        syncUtilsInSockets()
     })
 }
 npmLogin(pub)

@@ -6,7 +6,7 @@ import {isAdmin} from './aws_security'
 import {S3} from './s3'
 import {Lightsail} from './lightsail'
 import {defaultHash, compareHash} from './utils'
-import {ErrorWithCode} from './error'
+import {ErrorWithCode, AWSUtilsError, AWSForbidden} from './error'
 
 function makeid(length) {
   var text = ''
@@ -31,5 +31,7 @@ export {
   compareHash,
   S3,
   Lightsail,
-  ErrorWithCode
+  ErrorWithCode,
+  AWSUtilsError,
+  AWSForbidden
 }

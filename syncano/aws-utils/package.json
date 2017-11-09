@@ -1,6 +1,6 @@
 {
   "name": "local-aws-utils",
-  "version": "0.0.1",
+  "version": "0.0.42",
   "description": "AWS supplementary lib.",
   "main": "lib/index.js",
   "author": "Kamil Matysiewicz (kamil@aexol.com)",

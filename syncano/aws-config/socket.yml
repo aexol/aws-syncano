@@ -52,3 +52,9 @@ endpoints:
             {
               "message": "go away"
             }
+        - exit_code: 501
+          description: Forbidden
+          example: |
+            {
+              "message": "well crap"
+            }
