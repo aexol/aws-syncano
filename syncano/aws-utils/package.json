@@ -1,0 +1,43 @@
+{
+  "name": "local-aws-utils",
+  "version": "0.0.1",
+  "description": "AWS supplementary lib.",
+  "main": "lib/index.js",
+  "author": "Kamil Matysiewicz (kamil@aexol.com)",
+  "license": "MIT",
+  "dependencies": {
+    "aws-bluebird": "^1.0.0",
+    "semver": "^5.4.1",
+    "syncano-server": "^0.8.5"
+  },
+  "scripts": {
+    "prepublish": "npm run build",
+    "prebuild": "rimraf ./lib",
+    "precommit": "lint-staged",
+    "build": "babel src --out-dir lib",
+    "lint": "standard --fix --env mocha --parser babel-eslint src/**/* ",
+    "format": "prettier --write --single-quote --no-semi --no-bracket-spacing *.js {src,test}/**/*.js"
+  },
+  "lint-staged": {
+    "src/**/*.js": [
+      "npm run lint",
+      "npm run format",
+      "git add"
+    ]
+  },
+  "devDependencies": {
+    "babel-cli": "^6.26.0",
+    "babel-eslint": "^8.0.1",
+    "babel-plugin-add-module-exports": "^0.2.1",
+    "babel-plugin-transform-class-properties": "^6.24.1",
+    "babel-plugin-transform-export-extensions": "^6.22.0",
+    "babel-plugin-transform-object-rest-spread": "^6.22.0",
+    "babel-plugin-transform-strict-mode": "^6.24.1",
+    "babel-preset-env": "^1.6.0",
+    "babel-register": "^6.26.0",
+    "lint-staged": "^4.2.3",
+    "prettier": "^1.7.4",
+    "rimraf": "^2.6.2",
+    "standard": "^10.0.3"
+  }
+}
