@@ -9,9 +9,9 @@
     "publish": "node scripts/publish.js",
     "stop_sinopia": "node scripts/stop_sinopia.js",
     "unpublish": "node scripts/unpublish.js",
-    "deploy": "yarn build && npm run start_sinopia && npm run publish && npx s deploy",
+    "deploy": "npm run build && npm run start_sinopia && npm run publish && npx s deploy",
     "hot": "npx s hot",
-    "prepublish": "yarn build",
+    "prepublish": "npm run build",
     "prebuild": "rimraf ./aws-utils/lib",
     "precommit": "lint-staged",
     "build": "babel ./aws-utils/src --out-dir ./aws-utils/lib",
@@ -20,8 +20,8 @@
   },
   "lint-staged": {
     "*.js": [
-      "yarn lint",
-      "yarn format",
+      "npm run lint",
+      "npm run format",
       "git add"
     ]
   },
