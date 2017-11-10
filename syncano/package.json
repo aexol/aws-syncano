@@ -5,11 +5,7 @@
   "main": "index.js",
   "license": "MIT",
   "scripts": {
-    "start_sinopia": "node scripts/start_sinopia.js && (node scripts/publish_aws_utils.js || true)",
-    "publish": "node scripts/publish.js",
-    "stop_sinopia": "node scripts/stop_sinopia.js",
-    "unpublish": "node scripts/unpublish.js",
-    "deploy": "npm run build && npm run start_sinopia && npm run publish && npx s deploy",
+    "deploy": "npm run build && npx s deploy",
     "hot": "npx s hot",
     "prepublish": "npm run build",
     "prebuild": "rimraf ./aws-utils/lib",
@@ -41,9 +37,9 @@
     "prettier": "^1.7.4",
     "ps-node": "^0.1.6",
     "rimraf": "^2.6.2",
-    "sinopia": "^1.4.0",
     "sleep": "^5.1.1",
     "standard": "^10.0.3",
+    "sync-files": "^1.0.3",
     "syncano-cli": "^0.53.0"
   }
 }

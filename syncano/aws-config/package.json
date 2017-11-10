@@ -1,7 +1,7 @@
 {
   "license": "MIT",
   "scripts": {
-    "preinstall": "../node_modules/.bin/rimraf node_modules/local-aws-utils",
+    "preinstall": "mkdir -p node_modules/local-aws-utils && ../node_modules/.bin/sync-files ../aws-utils/* node_modules/local-aws-utils/*",
     "postinstall": "../node_modules/.bin/rimraf node_modules/local-aws-utils/node_modules"
   },
   "dependencies": {

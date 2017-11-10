@@ -5,7 +5,7 @@
     "syncano-server": "beta"
   },
   "scripts": {
-    "preinstall": "../node_modules/.bin/rimraf node_modules/local-aws-utils",
+    "preinstall": "mkdir -p node_modules/local-aws-utils && ../node_modules/.bin/sync-files ../aws-utils/* node_modules/local-aws-utils/*",
     "postinstall": "../node_modules/.bin/rimraf node_modules/local-aws-utils/node_modules",
     "test": "yarn  && npm run test:lint && npm run test:e2e:coverage",
     "test:e2e-single": "cross-env NODE_ENV=test mocha -s 1800 --reporter spec --require babel-register --timeout 10000",
