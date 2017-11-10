@@ -1,10 +1,12 @@
 {
   "license": "MIT",
   "dependencies": {
-    "local-aws-utils": "^0.0.58",
+    "local-aws-utils": "file:../aws-utils",
     "syncano-server": "beta"
   },
   "scripts": {
+    "preinstall": "../node_modules/.bin/rimraf node_modules/local-aws-utils",
+    "postinstall": "../node_modules/.bin/rimraf node_modules/local-aws-utils/node_modules",
     "test": "yarn  && npm run test:lint && npm run test:e2e:coverage",
     "test:e2e-single": "cross-env NODE_ENV=test mocha -s 1800 --reporter spec --require babel-register --timeout 10000",
     "test:e2e-single:coverage": "nyc --produce-source-map=true cross-env NODE_ENV=test mocha -s 1800 --reporter spec --require babel-register --timeout 4000",

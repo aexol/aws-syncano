@@ -1741,9 +1741,8 @@ load-json-file@^1.0.0:
     pinkie-promise "^2.0.0"
     strip-bom "^2.0.0"
 
-local-aws-utils@^0.0.58:
+"local-aws-utils@file:../aws-utils":
   version "0.0.58"
-  resolved "http://localhost:4873/local-aws-utils/-/local-aws-utils-0.0.58.tgz#a5eb1e3ea21963325768d4b2c45f6274cfd315d2"
   dependencies:
     aws-bluebird "^1.0.0"
     semver "^5.4.1"
