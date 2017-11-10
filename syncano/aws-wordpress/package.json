@@ -1,12 +1,12 @@
 {
   "license": "MIT",
   "dependencies": {
-    "local-aws-utils": "file:../aws-utils",
+    "aws-utils": "file:../aws-utils",
     "syncano-server": "beta"
   },
   "scripts": {
-    "preinstall": "mkdir -p node_modules/local-aws-utils && ../node_modules/.bin/sync-files ../aws-utils/* node_modules/local-aws-utils/*",
-    "postinstall": "../node_modules/.bin/rimraf node_modules/local-aws-utils/node_modules",
+    "preinstall": "sh -c 'unset NODE_ENV && cd ../aws-wordpress && yarn install --ignore-scripts' && mkdir -p node_modules/aws-utils && ../aws-wordpress/node_modules/.bin/sync-files ../aws-utils node_modules/aws-utils",
+    "postinstall": "../aws-wordpress/node_modules/.bin/rimraf node_modules/aws-utils/node_modules",
     "test": "yarn  && npm run test:lint && npm run test:e2e:coverage",
     "test:e2e-single": "cross-env NODE_ENV=test mocha -s 1800 --reporter spec --require babel-register --timeout 10000",
     "test:e2e-single:coverage": "nyc --produce-source-map=true cross-env NODE_ENV=test mocha -s 1800 --reporter spec --require babel-register --timeout 4000",
@@ -20,6 +20,8 @@
     "chai": "^4.1.2",
     "faker": "^4.1.0",
     "mocha": "^4.0.1",
+    "rimraf": "^2.6.2",
+    "sync-files": "^1.0.3",
     "syncano-test": "^0.3.3"
   },
   "standard": {

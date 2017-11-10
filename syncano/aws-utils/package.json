@@ -1,8 +1,8 @@
 {
-  "name": "local-aws-utils",
-  "version": "0.0.58",
+  "name": "aws-utils",
+  "version": "0.0.59",
   "description": "AWS supplementary lib.",
-  "main": "lib/index.js",
+  "main": "src/index.js",
   "author": "Kamil Matysiewicz (kamil@aexol.com)",
   "license": "MIT",
   "dependencies": {
@@ -12,11 +12,11 @@
   },
   "scripts": {
     "prepublish": "npm run build",
-    "prebuild": "rimraf ./lib",
+    "prebuild": "rimraf ./src",
     "precommit": "lint-staged",
-    "build": "babel src --out-dir lib",
-    "lint": "standard --fix --env mocha --parser babel-eslint src/**/* ",
-    "format": "prettier --write --single-quote --no-semi --no-bracket-spacing *.js {src,test}/**/*.js"
+    "build": "babel lib --out-dir src",
+    "lint": "standard --fix --env mocha --parser babel-eslint lib/**/* ",
+    "format": "prettier --write --single-quote --no-semi --no-bracket-spacing *.js {lib,test}/**/*.js"
   },
   "lint-staged": {
     "src/**/*.js": [

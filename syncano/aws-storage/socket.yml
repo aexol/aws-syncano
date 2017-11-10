@@ -1,6 +1,6 @@
 name: aws-storage
 description: Description of aws-storage
-version: 0.0.1
+version: 0.0.5
 
 config:
   REGION:
@@ -14,6 +14,9 @@ config:
 classes:
   bucket:
     - name: name
+      type: string
+      filter_index: true
+    - name: region 
       type: string
       filter_index: true
 endpoints:

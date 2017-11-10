@@ -1,5 +1,5 @@
 import Server from 'syncano-server'
-import {defaultHash, compareHash, ErrorWithCode} from 'local-aws-utils'
+import {defaultHash, compareHash, ErrorWithCode} from 'aws-utils'
 
 export default async ctx => {
   const server = Server(ctx)

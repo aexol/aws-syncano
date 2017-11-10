@@ -1,14 +1,15 @@
 {
   "license": "MIT",
   "scripts": {
-    "preinstall": "mkdir -p node_modules/local-aws-utils && ../node_modules/.bin/sync-files ../aws-utils/* node_modules/local-aws-utils/*",
-    "postinstall": "../node_modules/.bin/rimraf node_modules/local-aws-utils/node_modules"
+    "preinstall": "sh -c 'unset NODE_ENV && cd ../aws-config && yarn install --ignore-scripts' && mkdir -p node_modules/aws-utils && ../aws-config/node_modules/.bin/sync-files ../aws-utils node_modules/aws-utils",
+    "postinstall": "../aws-config/node_modules/.bin/rimraf node_modules/aws-utils/node_modules"
   },
   "dependencies": {
-    "local-aws-utils": "file:../aws-utils",
+    "aws-utils": "file:../aws-utils",
     "syncano-server": "beta"
   },
   "devDependencies": {
-    "rimraf": "^2.6.2"
+    "rimraf": "^2.6.2",
+    "sync-files": "^1.0.3"
   }
 }

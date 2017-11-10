@@ -1,5 +1,5 @@
 import Server from 'syncano-server'
-import {awsDefaultS3Context, S3} from 'local-aws-utils'
+import {awsDefaultS3Context, S3} from 'aws-utils'
 
 export default async ctx => {
   const {response} = Server(ctx)

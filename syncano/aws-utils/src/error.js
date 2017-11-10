@@ -1,17 +1,24 @@
-class ErrorWithCode extends Error {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+let ErrorWithCode = class ErrorWithCode extends Error {
   constructor(message, code) {
-    super(message)
-    this.code = code
+    super(message);
+    this.code = code;
   }
-}
-class AWSUtilsError extends ErrorWithCode {
+};
+let AWSUtilsError = class AWSUtilsError extends ErrorWithCode {
   constructor(message, code) {
-    super(message, 400)
+    super(message, 400);
   }
-}
-class AWSForbidden extends ErrorWithCode {
+};
+let AWSForbidden = class AWSForbidden extends ErrorWithCode {
   constructor(message, code) {
-    super(message, 403)
+    super(message, 403);
   }
-}
-export {AWSUtilsError, AWSForbidden, ErrorWithCode}
+};
+exports.AWSUtilsError = AWSUtilsError;
+exports.AWSForbidden = AWSForbidden;
+exports.ErrorWithCode = ErrorWithCode;

@@ -8,9 +8,9 @@
     "deploy": "npm run build && npx s deploy",
     "hot": "npx s hot",
     "prepublish": "npm run build",
-    "prebuild": "rimraf ./aws-utils/lib",
+    "prebuild": "rimraf ./aws-utils/src",
     "precommit": "lint-staged",
-    "build": "babel ./aws-utils/src --out-dir ./aws-utils/lib",
+    "build": "babel ./aws-utils/lib --out-dir ./aws-utils/src",
     "lint": "standard --fix --env mocha --parser babel-eslint */src/**/* ",
     "format": "prettier --write --single-quote --no-semi --no-bracket-spacing *.js */{src,test}/**/*.js"
   },

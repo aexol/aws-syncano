@@ -1,5 +1,5 @@
 import Server from 'syncano-server'
-import {S3, isAdmin, ErrorWithCode, AWSForbidden} from 'local-aws-utils'
+import {S3, isAdmin, ErrorWithCode, AWSForbidden} from 'aws-utils'
 
 export default async ctx => {
   const {response, logger} = Server(ctx)
