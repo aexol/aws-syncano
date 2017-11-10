@@ -5,10 +5,11 @@
   "main": "index.js",
   "license": "MIT",
   "scripts": {
-    "start_sinopia": "node scripts/start_sinopia.js",
+    "start_sinopia": "node scripts/start_sinopia.js && (node scripts/publish_aws_utils.js || true)",
+    "publish": "node scripts/publish.js",
     "stop_sinopia": "node scripts/stop_sinopia.js",
     "unpublish": "node scripts/unpublish.js",
-    "deploy": "yarn build && yarn start_sinopia && npx s deploy",
+    "deploy": "yarn build && npm run start_sinopia && npm run publish && npx s deploy",
     "hot": "npx s hot",
     "prepublish": "yarn build",
     "prebuild": "rimraf ./aws-utils/lib",

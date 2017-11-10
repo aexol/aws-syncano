@@ -2,15 +2,14 @@ import Server from 'syncano-server'
 import {S3, isAdmin, ErrorWithCode, AWSForbidden} from 'local-aws-utils'
 
 export default async ctx => {
-  const server = Server(ctx)
-  const {data, response, logger} = server
+  const {data, response, logger} = Server(ctx)
   const {error} = logger('aws-storage/create-bucket')
   const {name, region} = ctx.args
   try {
-    if (!(await isAdmin(ctx, server))) {
+    if (!(await isAdmin(ctx))) {
       throw new AWSForbidden('Bad amazon key')
     }
-    const s3instance = await S3(ctx, server, region)
+    const s3instance = await S3(ctx, region)
     const res = await s3instance.createBucket(
       {
         Bucket: name

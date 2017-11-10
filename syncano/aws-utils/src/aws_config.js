@@ -2,8 +2,8 @@ import AWS from 'aws-sdk'
 import Server from 'syncano-server'
 import {AWSUtilsError} from './error'
 
-async function awsConfig({ctx, server, region}) {
-  const {data, logger} = server
+async function awsConfig({ctx, region}) {
+  const {data, logger} = Server(ctx)
   const {error} = logger('aws-utils@aws-config:')
   var awsId
   try {

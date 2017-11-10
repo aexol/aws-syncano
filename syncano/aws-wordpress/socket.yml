@@ -11,7 +11,6 @@ classes:
     - name: name
       type: string
       filter_index: true
-
 endpoints:
   create-ls-instance:
     description: Create new Lightsail Wordpress instance.

@@ -2,9 +2,3 @@ const {startSinopia, npmLogin, publish, syncUtilsInSockets} = require('./local_r
 const {sleep} = require('sleep');
 
 startSinopia()
-var pub = () => {
-    publish(() => {
-        syncUtilsInSockets()
-    })
-}
-npmLogin(pub)

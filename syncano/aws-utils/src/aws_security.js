@@ -1,8 +1,9 @@
 import {compareHash} from './utils.js'
 import {AWSUtilsError} from './error'
+import Server from 'syncano-server'
 
-async function isAdmin(ctx, server) {
-  const {data, logger} = server
+async function isAdmin(ctx) {
+  const {data, logger} = Server(ctx)
   const {error} = logger('aws-util@aws-security')
   var security
   try {

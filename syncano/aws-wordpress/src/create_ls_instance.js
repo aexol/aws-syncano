@@ -2,11 +2,10 @@ import Server from 'syncano-server'
 import {awsConfig, isAdmin, makeid, ErrorWithCode} from 'local-aws-utils'
 
 export default async (ctx) => {
-  const server = Server(ctx)
-  const {data, response, logger} = server
+  const {data, response, logger} = Server(ctx)
   const {error} = logger('aws-wordpress@create_instance:')
   try {
-    if (!(await isAdmin(ctx, server))) {
+    if (!(await isAdmin(ctx))) {
       return response.json({message: 'Forbidden'}, 403)
     }
     var newLightsailInstance = ctx.meta.instance + '-' + makeid(5)

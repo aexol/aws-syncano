@@ -11,6 +11,7 @@ const {sleep} = require('sleep');
 const {exec} = require('child_process');
 const {lookup, kill} = require('ps-node');
 const rmdir = require('rimraf');
+const EventEmitter = require('events')
 
 const registry = 'http://aaaa:aaaa@localhost:4873'
 const sinopiaPidFile = join(projectPath, '.sinopia')
@@ -103,24 +104,43 @@ function npmLogin(cb) {
 }
 
 
-function publish(cb) {
-    var bumpPatch = spawn('npm', ['version', 'patch'], {cwd: 'aws-utils'})
-    bumpPatch.on('close', (code, signal) => {
-        if(code == 0) {
-            var publish = spawn('npm', ['publish', `--registry=${registry}`], {cwd: 'aws-utils'})
-            publish.on('close', (code, signal) => {
-                if(code != 0) {
-                    console.log(`npm publish exited with ${code}`)
-                    process.exit(code)
-                }
-                cb()
-            })
+function publish(opts, cb) {
+    if(cb === "undefined") {
+        if(typeof opts === "function") {
+            cb = opts
+        } else {
+            throw new Error("Callback required.")
         }
-    })
+    }
+
+    pubFunc = () => {
+        var publish = spawn('npm', ['publish', `--registry=${registry}`], {cwd: 'aws-utils'})
+        publish.on('close', (code, signal) => {
+            if(code != 0) {
+                console.log(`npm publish exited with ${code}`)
+                process.exit(code)
+            }
+            cb()
+        })
+    }
+    if(opts.bumpVersion === "undefined" || opts.bumpVersion === true) {
+        var bumpPatch = spawn('npm', ['version', 'patch'], {cwd: 'aws-utils'})
+        bumpPatch.on('close', (code, signal) => {
+            if(code == 0) {
+                pubFunc()
+            }
+        })
+    } else {
+        pubFunc()
+    }
 }
+
+class InstallSync extends EventEmitter{}
 
 function syncUtilsInSockets() {
     const sockets = getSockets()
+    const installEvents = new InstallSync()
+    var lInstall = 0
     for(var i = 0; i < sockets.length; i++) {
         const sockDistDir = join(sockets[i], '.dist')
         if(!existsSync(sockDistDir)) {
@@ -129,12 +149,35 @@ function syncUtilsInSockets() {
         writeFileSync(join(sockDistDir, '.yarnrc'), `registry "${registry}"\n`)
         //copyFileSync(join(sockets[i], 'package.json'), join(sockDistDir, 'package.json'))
         rmdir.sync(join(sockDistDir, 'node_modules', 'local-aws-utils'))
-        var yarnProd = spawn('yarn', ['upgrade', '--prefer-offline', '-L', 'local-aws-utils', `--registry=${registry}`], {cwd: sockets[i], stdio: ['ignore', 'ignore', process.stderr]})
-        yarnProd.on('close', (code, signal) => {
-            if(code != 0) {
-                console.log(`yarn upgrade local-aws-utils exited with: ${code}`)
+        const installIfNeeded = () => {
+            const f = () => {
+                if(lInstall !== 0) {
+                    return
+                }
+                lInstall = 1
+                const yarnInst = spawn('yarn', ['install', `--registry=${registry}`], {cwd: sockets[i], stdio: ['ignore', 'ignore', process.stderr]})
+                yarnInst.on('close', (code, signal) => {
+                    if(code != 0) {
+                        console.log(`yarn install exited with: ${code}`)
+                    }
+                    lInstall = 0
+                    installEvents.emit('install')
+                })
+                installEvents.removeListener('install', f)
             }
-        })
+            installEvents.on('install', f)
+            installEvents.emit('install')
+        }
+        if(!existsSync(join(sockets[i], 'yarn.lock'))) {
+            installIfNeeded()
+        } else {
+            const yarnProd = spawn('yarn', ['upgrade', '--prefer-offline', '-L', 'local-aws-utils', `--registry=${registry}`], {cwd: sockets[i], stdio: ['ignore', 'ignore', process.stderr]})
+            yarnProd.on('close', (code, signal) => {
+                if(code != 0) {
+                    installIfNeeded()
+                }
+            })
+        }
     }
 }
 

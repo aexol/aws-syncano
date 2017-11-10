@@ -15,8 +15,8 @@ aws-bluebird@^1.0.0:
     debug "^2.2.0"
 
 aws-sdk@^2.2.3:
-  version "2.148.0"
-  resolved "http://localhost:4873/aws-sdk/-/aws-sdk-2.148.0.tgz#06d1cde0aeda2d290d2ce8466e6a7305b559bbb2"
+  version "2.149.0"
+  resolved "http://localhost:4873/aws-sdk/-/aws-sdk-2.149.0.tgz#76f53722a7780bdb3191e83f27c10108c6fe9813"
   dependencies:
     buffer "4.9.1"
     crypto-browserify "1.0.9"
@@ -29,13 +29,6 @@ aws-sdk@^2.2.3:
     xml2js "0.4.17"
     xmlbuilder "4.2.1"
 
-babel-runtime@^6.11.6:
-  version "6.26.0"
-  resolved "http://localhost:4873/babel-runtime/-/babel-runtime-6.26.0.tgz#965c7058668e82b55d7bfe04ff2337bc8b5647fe"
-  dependencies:
-    core-js "^2.4.0"
-    regenerator-runtime "^0.11.0"
-
 base64-js@^1.0.2:
   version "1.2.1"
   resolved "http://localhost:4873/base64-js/-/base64-js-1.2.1.tgz#a91947da1f4a516ea38e5b4ec0ec3773675e0886"
@@ -43,10 +36,6 @@ base64-js@^1.0.2:
 bluebird@^2.10.0:
   version "2.11.0"
   resolved "http://localhost:4873/bluebird/-/bluebird-2.11.0.tgz#534b9033c022c9579c56ba3b3e5a5caafbb650e1"
-
-buffer-to-arraybuffer@0.0.4:
-  version "0.0.4"
-  resolved "http://localhost:4873/buffer-to-arraybuffer/-/buffer-to-arraybuffer-0.0.4.tgz#f3e5e3f6f2632c71e7cdebe76ed1718fad421d4c"
 
 buffer@4.9.1:
   version "4.9.1"
@@ -62,10 +51,6 @@ combined-stream@^1.0.5:
   dependencies:
     delayed-stream "~1.0.0"
 
-core-js@^2.4.0:
-  version "2.5.1"
-  resolved "http://localhost:4873/core-js/-/core-js-2.5.1.tgz#ae6874dc66937789b80754ff5428df66819ca50b"
-
 crypto-browserify@1.0.9:
   version "1.0.9"
   resolved "http://localhost:4873/crypto-browserify/-/crypto-browserify-1.0.9.tgz#cc5449685dfb85eb11c9828acc7cb87ab5bbfcc0"
@@ -80,17 +65,11 @@ delayed-stream@~1.0.0:
   version "1.0.0"
   resolved "http://localhost:4873/delayed-stream/-/delayed-stream-1.0.0.tgz#df3ae199acadfb7d440aaae0b29e2272b24ec619"
 
-encoding@^0.1.11:
-  version "0.1.12"
-  resolved "http://localhost:4873/encoding/-/encoding-0.1.12.tgz#538b66f3ee62cd1ab51ec323829d1f9480c74beb"
-  dependencies:
-    iconv-lite "~0.4.13"
-
 events@^1.1.1:
   version "1.1.1"
   resolved "http://localhost:4873/events/-/events-1.1.1.tgz#9ebdb7635ad099c70dcc4c2a1f5004288e8bd924"
 
-form-data@^2.1.4, form-data@^2.3.1:
+form-data@^2.3.1:
   version "2.3.1"
   resolved "http://localhost:4873/form-data/-/form-data-2.3.1.tgz#6fb94fbd71885306d73d15cc497fe4cc4ecd44bf"
   dependencies:
@@ -98,17 +77,9 @@ form-data@^2.1.4, form-data@^2.3.1:
     combined-stream "^1.0.5"
     mime-types "^2.1.12"
 
-iconv-lite@~0.4.13:
-  version "0.4.19"
-  resolved "http://localhost:4873/iconv-lite/-/iconv-lite-0.4.19.tgz#f7468f60135f5e5dad3399c0a81be9a1603a082b"
-
 ieee754@^1.1.4:
   version "1.1.8"
   resolved "http://localhost:4873/ieee754/-/ieee754-1.1.8.tgz#be33d40ac10ef1926701f6f08a2d86fbfd1ad3e4"
-
-is-stream@^1.0.1:
-  version "1.1.0"
-  resolved "http://localhost:4873/is-stream/-/is-stream-1.1.0.tgz#12d4a3dd4e68e0b79ceb8dbc84173ae80d91ca44"
 
 isarray@^1.0.0:
   version "1.0.0"
@@ -118,13 +89,13 @@ jmespath@0.15.0:
   version "0.15.0"
   resolved "http://localhost:4873/jmespath/-/jmespath-0.15.0.tgz#a3f222a9aae9f966f5d27c796510e28091764217"
 
-local-aws-utils@^0.0.42:
-  version "0.0.42"
-  resolved "http://localhost:4873/local-aws-utils/-/local-aws-utils-0.0.42.tgz#85b591730bd296695b09417c87b2e5fb56b8d5e9"
+local-aws-utils@^0.0.58:
+  version "0.0.58"
+  resolved "http://localhost:4873/local-aws-utils/-/local-aws-utils-0.0.58.tgz#a5eb1e3ea21963325768d4b2c45f6274cfd315d2"
   dependencies:
     aws-bluebird "^1.0.0"
     semver "^5.4.1"
-    syncano-server "^0.8.5"
+    syncano-server beta
 
 lodash.get@^4.4.2:
   version "4.4.2"
@@ -156,15 +127,6 @@ ms@2.0.0:
   version "2.0.0"
   resolved "http://localhost:4873/ms/-/ms-2.0.0.tgz#5608aeadfc00be6c2901df5f9861788de0d597c8"
 
-node-fetch@2.0.0-alpha.3:
-  version "2.0.0-alpha.3"
-  resolved "http://localhost:4873/node-fetch/-/node-fetch-2.0.0-alpha.3.tgz#8031bded671c806e4604c16b27ab1973b4fe88cc"
-  dependencies:
-    babel-runtime "^6.11.6"
-    buffer-to-arraybuffer "0.0.4"
-    encoding "^0.1.11"
-    is-stream "^1.0.1"
-
 node-fetch@2.0.0-alpha.9:
   version "2.0.0-alpha.9"
   resolved "http://localhost:4873/node-fetch/-/node-fetch-2.0.0-alpha.9.tgz#990c0634f510f76449a0d6f6eaec96b22f273628"
@@ -177,10 +139,6 @@ querystring@0.2.0:
   version "0.2.0"
   resolved "http://localhost:4873/querystring/-/querystring-0.2.0.tgz#b209849203bb25df820da756e747005878521620"
 
-regenerator-runtime@^0.11.0:
-  version "0.11.0"
-  resolved "http://localhost:4873/regenerator-runtime/-/regenerator-runtime-0.11.0.tgz#7e54fe5b5ccd5d6624ea6255c3473be090b802e1"
-
 sax@1.2.1:
   version "1.2.1"
   resolved "http://localhost:4873/sax/-/sax-1.2.1.tgz#7b8e656190b228e81a66aea748480d828cd2d37a"
@@ -192,16 +150,6 @@ sax@>=0.6.0:
 semver@^5.4.1:
   version "5.4.1"
   resolved "http://localhost:4873/semver/-/semver-5.4.1.tgz#e059c09d8571f0540823733433505d3a2f00b18e"
-
-syncano-server@^0.8.5:
-  version "0.8.5"
-  resolved "http://localhost:4873/syncano-server/-/syncano-server-0.8.5.tgz#ac4691ccf0590553518273052ec032a14b387f53"
-  dependencies:
-    form-data "^2.1.4"
-    lodash.get "^4.4.2"
-    lodash.merge "^4.6.0"
-    lodash.set "^4.3.2"
-    node-fetch "2.0.0-alpha.3"
 
 syncano-server@beta:
   version "1.0.1-13"
