@@ -3,8 +3,7 @@ import {AWSUtilsError} from './error'
 import Server from 'syncano-server'
 
 async function isAdmin(ctx) {
-  const {data, logger} = Server(ctx)
-  const {error} = logger('aws-util@aws-security')
+  const {data} = Server(ctx)
   var security
   try {
     security = await data.security.firstOrFail()

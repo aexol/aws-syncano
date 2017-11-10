@@ -2,7 +2,7 @@ import Server from 'syncano-server'
 import {awsDefaultS3Context, S3} from 'local-aws-utils'
 
 export default async ctx => {
-  const {data, response} = Server(ctx)
+  const {response} = Server(ctx)
   try {
     const {bucketName, region} = await awsDefaultS3Context(ctx)
     const {name} = ctx.args
