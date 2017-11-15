@@ -8,7 +8,7 @@ import {Lightsail} from './lightsail'
 import {defaultHash, compareHash} from './utils'
 import {ErrorWithCode, AWSUtilsError, AWSForbidden} from './error'
 
-function makeid(length) {
+function makeid(length = 5) {
   var text = ''
   var possible =
     'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789'

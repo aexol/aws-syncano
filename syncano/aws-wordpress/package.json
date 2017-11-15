@@ -5,8 +5,12 @@
     "syncano-server": "beta"
   },
   "scripts": {
-    "preinstall": "sh -c 'unset NODE_ENV && cd ../aws-wordpress && yarn install --ignore-scripts' && mkdir -p node_modules/aws-utils && ../aws-wordpress/node_modules/.bin/sync-files ../aws-utils node_modules/aws-utils",
-    "postinstall": "../aws-wordpress/node_modules/.bin/rimraf node_modules/aws-utils/node_modules",
+    "bootstrap-dev": "sh -c 'cd ../aws-wordpress && yarn install --ignore-scripts --production=false'",
+    "sync-aws-utils": "mkdir -p node_modules/aws-utils && ../aws-wordpress/node_modules/.bin/sync-files ../aws-utils node_modules/aws-utils",
+    "sync-local": "npm run sync-aws-utils",
+    "clean-aws-utils": "../aws-wordpress/node_modules/.bin/rimraf node_modules/aws-utils/node_modules",
+    "clean-local": "npm run clean-aws-utils",
+    "postinstall": "npm run bootstrap-dev && npm run sync-local && npm run clean-local",
     "test": "yarn  && npm run test:lint && npm run test:e2e:coverage",
     "test:e2e-single": "cross-env NODE_ENV=test mocha -s 1800 --reporter spec --require babel-register --timeout 10000",
     "test:e2e-single:coverage": "nyc --produce-source-map=true cross-env NODE_ENV=test mocha -s 1800 --reporter spec --require babel-register --timeout 4000",
@@ -15,8 +19,6 @@
     "test:lint": "standard --fix"
   },
   "devDependencies": {
-    "babel-preset-es2015": "^6.24.1",
-    "babel-preset-stage-0": "^6.24.1",
     "chai": "^4.1.2",
     "faker": "^4.1.0",
     "mocha": "^4.0.1",

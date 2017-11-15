@@ -14,15 +14,23 @@
     "prepublish": "npm run build",
     "prebuild": "rimraf ./src",
     "precommit": "lint-staged",
-    "build": "babel lib --out-dir src",
-    "lint": "standard --fix --env mocha --parser babel-eslint lib/**/* ",
-    "format": "prettier --write --single-quote --no-semi --no-bracket-spacing *.js {lib,test}/**/*.js"
+    "build": "babel lib --out-dir src --ignore '**/*.test.js,**/__mocks__'",
+    "lint": "standard --fix --env mocha --parser babel-eslint lib/*.js ",
+    "format": "prettier --write --single-quote --no-semi --no-bracket-spacing *.js {lib,test}/**/*.js",
+    "test": "npm run test:unit",
+    "test:unit": "jest"
   },
   "lint-staged": {
     "src/**/*.js": [
       "npm run lint",
       "npm run format",
       "git add"
+    ]
+  },
+  "standard": {
+    "ignore": [
+      "**/__mocks__/",
+      "**/*.test.js"
     ]
   },
   "devDependencies": {
@@ -35,7 +43,10 @@
     "babel-plugin-transform-strict-mode": "^6.24.1",
     "babel-preset-env": "^1.6.0",
     "babel-register": "^6.26.0",
+    "chai": "^4.1.2",
+    "jest": "^21.2.1",
     "lint-staged": "^4.2.3",
+    "mocha": "^4.0.1",
     "prettier": "^1.7.4",
     "rimraf": "^2.6.2",
     "standard": "^10.0.3"

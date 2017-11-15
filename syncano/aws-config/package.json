@@ -1,8 +1,15 @@
 {
+  "name": "aws-config",
+  "version": "0.0.3",
   "license": "MIT",
+  "main": "src/index.js",
   "scripts": {
-    "preinstall": "sh -c 'unset NODE_ENV && cd ../aws-config && yarn install --ignore-scripts' && mkdir -p node_modules/aws-utils && ../aws-config/node_modules/.bin/sync-files ../aws-utils node_modules/aws-utils",
-    "postinstall": "../aws-config/node_modules/.bin/rimraf node_modules/aws-utils/node_modules"
+    "bootstrap-dev": "sh -c 'cd ../aws-config && yarn install --ignore-scripts --production=false'",
+    "sync-aws-utils": "mkdir -p node_modules/aws-utils && ../aws-config/node_modules/.bin/sync-files ../aws-utils node_modules/aws-utils",
+    "sync-local": "npm run sync-aws-utils",
+    "clean-aws-utils": "../aws-config/node_modules/.bin/rimraf node_modules/aws-utils/node_modules",
+    "clean-local": "npm run clean-aws-utils",
+    "postinstall": "npm run bootstrap-dev && npm run clean-aws-utils"
   },
   "dependencies": {
     "aws-utils": "file:../aws-utils",

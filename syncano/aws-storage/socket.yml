@@ -25,17 +25,13 @@ endpoints:
     file: create_bucket.js
     parameters:
       name:
-        type: Bucket name
+        type: string
         description: Name of your new s3 bucket
         example: MyFiles
       region:
         type: string
         description: region name
         example: eu-central-1
-      AMAZON_KEY:
-        type: string
-        description: Amazon Key
-        example: junihad87asy78sa
   upload:
     description: Upload file to public endpoint
     file: public_file_upload_b64.js

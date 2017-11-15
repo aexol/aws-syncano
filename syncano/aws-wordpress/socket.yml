@@ -7,19 +7,50 @@ classes:
     - name: name
       type: string
       filter_index: true
+    - name: pubssh
+      type: string
+    - name: privssh
+      type: string
+    - name: region
+      type: string
+  amazon_instances:
+    - name: name
+      type: string
+      filter_index: true
+    - name: zone
+      type: string
   lightsail_instances:
     - name: name
       type: string
       filter_index: true
+    - name: keypair
+      type: reference
+      target: keypairs
+    - name: blueprint
+      type: string
+    - name: bundle
+      type: string
+    - name: amazonInstances
+      type: relation
+      target: amazon_instances
 endpoints:
   create-ls-instance:
     description: Create new Lightsail Wordpress instance.
     file: create_ls_instance.js
     parameters:
-      AMAZON_KEY:
-        description: Adminisrators password
+      name:
         type: string
-    reponse:
+        description: Name of new instance
+        example: ws1-instance
+      bundleId:
+        type: string
+        description: BundleID of lightsail instance
+        example: micro_1_0
+      price:
+        type: string
+        description: Match bundle by price
+        example: 10
+    response:
       mimetype: application/json
       examples:
         - exit_code: 200

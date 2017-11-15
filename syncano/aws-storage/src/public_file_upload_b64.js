@@ -12,13 +12,16 @@ export default async ctx => {
       throw new Error('You are not allowed to do that')
     }
     const s3instance = await S3(ctx, region)
-    const res = await s3instance.putObject({
+    await s3instance.putObject({
       Body: fileValue,
       Bucket: bucketName,
       Key: name,
       ACL: 'public-read'
     })
-    return response.json({message: `https:\/\/s3.${region}.amazonaws.com/${bucketName}/${name}`}, 200)
+    return response.json(
+      {message: `https://s3.${region}.amazonaws.com/${bucketName}/${name}`},
+      200
+    )
   } catch (e) {
     error(e.stack)
     return response.json({message: JSON.stringify(e.stack)}, 400)

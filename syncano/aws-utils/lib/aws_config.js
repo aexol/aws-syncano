@@ -12,14 +12,11 @@ async function awsConfig({ctx, region}) {
     throw new AWSUtilsError('Please install and configure aws-config socket.')
   }
   const {AWS_ACCESS_KEY_ID, AWS_SECRET_ACCESS_KEY} = awsId
-  const creds = new AWS.Credentials({
+  const credentials = new AWS.Credentials({
     accessKeyId: AWS_ACCESS_KEY_ID,
     secretAccessKey: AWS_SECRET_ACCESS_KEY
   })
-  const config = new AWS.Config({
-    region,
-    credentials: creds
-  })
+  const config = new AWS.Config({credentials, region})
   error(config)
   return config
 }

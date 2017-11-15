@@ -1,13 +1,12 @@
 import Server from 'syncano-server'
-import {defaultHash, compareHash, ErrorWithCode} from 'aws-utils'
+import {isAdmin, ErrorWithCode} from 'aws-utils'
 
 export default async ctx => {
   const server = Server(ctx)
   const {response, data, logger} = server
   const {error} = logger('aws-config/install')
-  const hashedKey = defaultHash(ctx.config.AMAZON_KEY)
   try {
-    if (!compareHash(ctx.args.AMAZON_KEY, hashedKey)) {
+    if (!await isAdmin) {
       return response.json({message: 'go away'}, 403)
     }
     if (
@@ -21,7 +20,11 @@ export default async ctx => {
       AWS_ACCESS_KEY_ID: ctx.args.AWS_ACCESS_KEY_ID,
       AWS_SECRET_ACCESS_KEY: ctx.args.AWS_SECRET_ACCESS_KEY
     })
-    await data.security.firstOrCreate({}, {AMAZON_KEY: hashedKey})
+    const region = ctx.args.REGION ? ctx.args.REGION : 'eu-central-1'
+    await data.aws_config.updateOrCreate(
+      {key: 'REGION'},
+      {key: 'REGION', value: region}
+    )
     return response.json({message: 'Installed'}, 200)
   } catch (e) {
     if (e instanceof ErrorWithCode) {
