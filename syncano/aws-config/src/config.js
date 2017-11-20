@@ -1,6 +1,6 @@
 import Server from 'syncano-server'
 
-async function getValue (ctx, key) {
+async function getValue(ctx, key) {
   try {
     const {data} = Server(ctx)
     return await data.aws_config.where('key', key).firstOrFail()
@@ -8,7 +8,7 @@ async function getValue (ctx, key) {
   return null
 }
 
-async function setValue (ctx, key, value) {
+async function setValue(ctx, key, value) {
   const {data} = Server(ctx)
   return data.aws_config.updateOrCreate({key}, {key, value})
 }

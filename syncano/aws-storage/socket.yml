@@ -106,7 +106,7 @@ endpoints:
             {
               'message': 'Forbidden'
             }
-        - exit_code: 501
+        - exit_code: 500
           description: Well, that went badly.
           example: |
             {

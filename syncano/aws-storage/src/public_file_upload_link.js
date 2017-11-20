@@ -19,6 +19,6 @@ export default async ctx => {
     })
     return response.json({link})
   } catch (error) {
-    return response.json(error.message, 400)
+    return response.json(error.message, 500)
   }
 }

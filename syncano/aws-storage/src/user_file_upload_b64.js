@@ -31,6 +31,6 @@ export default async ctx => {
       link: `https://s3.${region}.amazonaws.com/${bucketName}/${fullName}`
     })
   } catch (error) {
-    return response.json(error.message, 400)
+    return response.json(error.message, 500)
   }
 }

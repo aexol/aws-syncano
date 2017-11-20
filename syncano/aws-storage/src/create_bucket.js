@@ -19,6 +19,6 @@ export default async ctx => {
       return response.json({message: e.message}, e.code)
     }
     error(e.stack)
-    return response.json(e, 400)
+    return response.json(e, 500)
   }
 }

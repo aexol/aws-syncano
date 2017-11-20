@@ -9,38 +9,43 @@ export default async ctx => {
       return response.json({message: 'Forbidden'}, 403)
     }
     const {bucketName, region} = await awsDefaultS3Context(ctx)
-    const {names} = ctx.args
+    let {fileNames} = ctx.args
     const {EXPIRE = 3600} = ctx.config
-    if (!Array.isArray(names)) {
+    if (typeof fileNames === 'string') {
+      fileNames = [fileNames]
+    }
+    if (!Array.isArray(fileNames)) {
       return response.json(
-        {message: 'names are required and must be an array of strings'},
+        {
+          message: 'invalid usage',
+          expected:
+            'fileNames parameter is required and must be an array of strings or string',
+          got: fileNames
+        },
         400
       )
     }
     const s3instance = await S3(ctx, region)
     const links = {}
-    names.forEach(async element => {
-      if (typeof element !== 'string') {
-        error(element + ' is not a string')
-        return
+    const errors = []
+    for (let file of fileNames) {
+      if (typeof file !== 'string') {
+        error(file + ' is not a string')
+        errors.push(file + ' is not a string')
+        continue
       }
-      try {
-        const link = await s3instance.getSignedUrl('getObject', {
-          Bucket: bucketName,
-          Key: element,
-          Expires: EXPIRE
-        })
-        links[element] = link
-      } catch (e) {
-        error('error creating signed url for ' + element)
-      }
-    })
-    return response.json({files: links})
+      links[file] = s3instance.getSignedUrl('getObject', {
+        Bucket: bucketName,
+        Key: file,
+        Expires: EXPIRE
+      })
+    }
+    return response.json({files: links, errors: errors})
   } catch (e) {
     if (e instanceof ErrorWithCode) {
       return response.json({message: e.message}, e.code)
     }
     error(e.stack)
-    return response.json({message: e.stack}, 501)
+    return response.json({message: e.stack}, 500)
   }
 }

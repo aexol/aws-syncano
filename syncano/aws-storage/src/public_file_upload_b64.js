@@ -24,6 +24,6 @@ export default async ctx => {
     )
   } catch (e) {
     error(e.stack)
-    return response.json({message: JSON.stringify(e.stack)}, 400)
+    return response.json({message: e.stack}, 500)
   }
 }
