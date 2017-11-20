@@ -16,7 +16,7 @@ export default async ctx => {
     if (name.indexOf('/') !== -1) {
       throw new Error('You are not allowed to do that')
     }
-    const s3instance = S3(ctx, region)
+    const s3instance = await S3(ctx, region)
     const fullName = `${user.id}/${name}`
     const link = s3instance.getSignedUrl('getObject', {
       Bucket: bucketName,

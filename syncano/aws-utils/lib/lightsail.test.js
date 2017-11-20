@@ -48,21 +48,24 @@ let regions = [
   {
     name: 'eu-central-1',
     availabilityZones: [
-        {
-            zoneName: 'eu-central-1a'
-        }, 
-        {
-            zoneName: 'eu-central-1b'
-        }]
+      {
+        zoneName: 'eu-central-1a'
+      },
+      {
+        zoneName: 'eu-central-1b'
+      }
+    ]
   },
   {
     name: 'us-east-1',
-    availabilityZones: [{
-            zoneName: 'us-east-1a'
-        }, 
-        {
-            zoneName: 'us-east-1b'
-        }]
+    availabilityZones: [
+      {
+        zoneName: 'us-east-1a'
+      },
+      {
+        zoneName: 'us-east-1b'
+      }
+    ]
   }
 ]
 
@@ -149,11 +152,11 @@ describe('regions api tests', () => {
     let ls = new Lightsail()
     return expect(await ls.getAvailabilityZones()).toEqual(
       (() => {
-          let azones = []
-          for(let i in regions[0].availabilityZones) {
-              azones.push(regions[0].availabilityZones[i].zoneName)
-          }
-          return azones
+        let azones = []
+        for (let i in regions[0].availabilityZones) {
+          azones.push(regions[0].availabilityZones[i].zoneName)
+        }
+        return azones
       })()
     )
   })

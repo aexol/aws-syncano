@@ -73,8 +73,8 @@ class Lightsail {
     await this.init()
     const region = await this.getRegion()
     let availabilityZones = []
-    for(let i in region.availabilityZones) {
-        availabilityZones.push(region.availabilityZones[i].zoneName)
+    for (let i in region.availabilityZones) {
+      availabilityZones.push(region.availabilityZones[i].zoneName)
     }
     return availabilityZones
   }
@@ -97,11 +97,13 @@ class Lightsail {
         return bundle
       }
     }
-    throw new AWSUtilsError(JSON.stringify({
+    throw new AWSUtilsError(
+      JSON.stringify({
         bundleId: this.args.bundleId,
         price: this.args.price,
         data
-    }))//'Could not find a valid bundle.')
+      })
+    ) //'Could not find a valid bundle.')
   }
 
   async getBundleId() {

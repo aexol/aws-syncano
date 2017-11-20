@@ -16,8 +16,9 @@ export default async ctx => {
     if (name.indexOf('/') !== -1) {
       throw new Error('You are not allowed to do that')
     }
-    const fileValue = Buffer.from(file.split(',')[1], 'base64')
-    const s3instance = S3(ctx, region)
+    const bSplit = file.split(',')
+    const fileValue = Buffer.from(bSplit[bSplit.length - 1], 'base64')
+    const s3instance = await S3(ctx, region)
     const fullName = `${user.id}/${name}`
     const res = await s3instance.putObject({
       Body: fileValue,
