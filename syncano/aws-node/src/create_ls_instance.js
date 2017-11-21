@@ -3,13 +3,13 @@ import {isAdmin, ErrorWithCode} from 'aws-utils'
 
 export default async ctx => {
   const {response, logger, socket} = Server(ctx)
-  const {error} = logger('aws-wordpress@create-ls-instance:')
+  const {error} = logger('aws-node@create-ls-instance:')
   try {
     if (!await isAdmin(ctx)) {
       return response.json({message: 'Forbidden'}, 403)
     }
     let args = ctx.args
-    args.blueprintGroup = 'wordpress'
+    args.blueprintGroup = 'node'
     try {
       const resp = await socket.post('aws-ls/create-ls-instance', args)
       return response.json(resp)

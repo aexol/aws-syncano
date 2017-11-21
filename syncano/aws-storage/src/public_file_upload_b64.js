@@ -7,7 +7,8 @@ export default async ctx => {
   try {
     const {bucketName, region} = await awsDefaultS3Context(ctx)
     const {name, file} = ctx.args
-    const fileValue = Buffer.from(file.split(',')[0], 'base64')
+    const bSplit = file.split(',')
+    const fileValue = Buffer.from(bSplit[bSplit.length - 1], 'base64')
     if (name.indexOf('/') !== -1) {
       throw new Error('You are not allowed to do that')
     }

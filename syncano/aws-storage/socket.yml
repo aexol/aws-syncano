@@ -28,7 +28,7 @@ endpoints:
         type: string
         description: region name
         example: eu-central-1
-  user_upload:
+  user-upload:
     description: Upload file to user endpoint
     file: user_file_upload_b64.js
     parameters:
@@ -48,7 +48,7 @@ endpoints:
         type: string
         description: region name
         example: eu-central-1
-  user_read:
+  user-read:
     description: Reads file from user endpoint
     file: user_file_read.js
     parameters:
@@ -64,7 +64,7 @@ endpoints:
         type: string
         description: region name
         example: eu-central-1
-  user_upload_link:
+  user-upload-link:
     description: Get upload public file link
     file: user_file_upload_link.js
     parameters:
@@ -112,3 +112,39 @@ endpoints:
             {
               'message': 'Internal Server Error'
             }
+  admin-upload:
+    description: Upload file to as admin
+    file: admin_upload_b64.js
+    parameters:
+      name:
+        type: string
+        description: Name of file
+        example: plik.png
+      file:
+        type: string
+        description: Base 64 encoded file
+        example: k198arh7r37h217rh72rh879
+      bucket_name:
+        type: Bucket name
+        description: Name of your new s3 bucket (optional).
+        example: MyFiles
+      region:
+        type: string
+        description: region name (optional).
+        example: eu-central-1
+  admin-upload-link:
+    description: Create upload link as administrator.
+    file: admin_upload_link.js
+    parameters:
+      name:
+        type: string
+        description: Name of file
+        example: plik.png
+      bucket_name:
+        type: Bucket name
+        description: Name of your new s3 bucket (optional).
+        example: MyFiles
+      region:
+        type: string
+        description: region name (optional).
+        example: eu-central-1

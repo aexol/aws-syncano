@@ -1,10 +1,41 @@
-name: aws-wordpress
-description: Description of aws-wordpress
+name: aws-ls
+description: Description of aws-ls
 version: 0.0.3
 
+classes:
+  keypairs:
+    - name: name
+      type: string
+      filter_index: true
+    - name: pubssh
+      type: text
+    - name: privssh
+      type: text
+    - name: region
+      type: string
+  amazon_instances:
+    - name: name
+      type: string
+      filter_index: true
+    - name: zone
+      type: string
+  lightsail_instances:
+    - name: name
+      type: string
+      filter_index: true
+    - name: keypair
+      type: reference
+      target: keypairs
+    - name: blueprint
+      type: string
+    - name: bundle
+      type: string
+    - name: amazonInstances
+      type: relation
+      target: amazon_instances
 endpoints:
   create-ls-instance:
-    description: Create new Lightsail Wordpress instance.
+    description: Create new Lightsail instance.
     file: create_ls_instance.js
     parameters:
       name:
@@ -15,6 +46,10 @@ endpoints:
         type: string
         description: BundleID of lightsail instance
         example: micro_1_0
+      blueprintGroup:
+        type: string
+        description: blueprint group of lightsail instance
+        example: wordpress
       price:
         type: string
         description: Match bundle by price

@@ -11,8 +11,8 @@
     "prebuild": "rimraf ./aws-utils/src",
     "precommit": "lint-staged",
     "build": "babel ./aws-utils/lib --out-dir ./aws-utils/src --ignore '**/*.test.js,**/__mocks__'",
-    "lint": "standard --fix --env mocha --parser babel-eslint aws-config/src/**/* aws-storage/src/**/* aws-utils/lib/**/* aws-wordpress/src/**/*",
-    "format": "prettier --write --single-quote --no-semi --no-bracket-spacing *.js aws-config/{src,test}/**/*.js aws-storage/{src,test}/**/*.js aws-utils/{lib,test}/**/*.js aws-wordpress/{src,test}/**/*.js"
+    "lint": "standard --fix --env mocha --parser babel-eslint aws-config/src/**/* aws-storage/src/**/* aws-utils/lib/**/* aws-ls/src/**/* aws-wordpress/src/**/* aws-node/src/**/*",
+    "format": "prettier --write --single-quote --no-semi --no-bracket-spacing *.js aws-config/{src,test}/**/*.js aws-storage/{src,test}/**/*.js aws-utils/{lib,test}/**/*.js aws-ls/{src,test}/**/*.js aws-wordpress/{src,test}/**/*.js aws-node/{src,test}/**/*.js"
   },
   "lint-staged": {
     "*.js": [

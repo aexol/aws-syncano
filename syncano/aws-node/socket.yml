@@ -1,5 +1,5 @@
-name: aws-wordpress
-description: Description of aws-wordpress
+name: aws-node
+description: Description of aws-node
 version: 0.0.3
 
 endpoints:
@@ -10,7 +10,7 @@ endpoints:
       name:
         type: string
         description: Name of new instance
-        example: ws1-instance
+        example: node1-instance
       bundleId:
         type: string
         description: BundleID of lightsail instance

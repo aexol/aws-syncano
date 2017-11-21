@@ -140,6 +140,13 @@ class Lightsail {
 
   async createInstance(group) {
     await this.init()
+    if (typeof group === 'undefined') {
+      if (typeof this.args.blueprintGroup !== 'undefined') {
+        group = this.args.blueprintGroup
+      } else {
+        throw new AWSUtilsError('blueprintGroup is required', 400)
+      }
+    }
     let result = {}
     const keyPair = await this.createKeyPair()
     result['keyPair'] = keyPair
@@ -171,6 +178,10 @@ class Lightsail {
   async createWordpressInstance() {
     await this.init()
     return this.createInstance('wordpress')
+  }
+  async createNodeInstance() {
+    await this.init()
+    return this.createInstance('node')
   }
 }
 

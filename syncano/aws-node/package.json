@@ -1,0 +1,56 @@
+{
+  "license": "MIT",
+  "dependencies": {
+    "aws-utils": "file:../aws-utils",
+    "syncano-server": "beta"
+  },
+  "scripts": {
+    "bootstrap-dev": "sh -c 'cd ../aws-node && yarn install --ignore-scripts --production=false'",
+    "sync-aws-utils": "mkdir -p node_modules/aws-utils && ../aws-node/node_modules/.bin/sync-files ../aws-utils node_modules/aws-utils",
+    "sync-local": "npm run sync-aws-utils",
+    "clean-aws-utils": "../aws-node/node_modules/.bin/rimraf node_modules/aws-utils/node_modules",
+    "clean-local": "npm run clean-aws-utils",
+    "postinstall": "npm run bootstrap-dev && npm run sync-local && npm run clean-local",
+    "test": "yarn  && npm run test:lint && npm run test:e2e:coverage",
+    "test:e2e-single": "cross-env NODE_ENV=test mocha -s 1800 --reporter spec --require babel-register --timeout 10000",
+    "test:e2e-single:coverage": "nyc --produce-source-map=true cross-env NODE_ENV=test mocha -s 1800 --reporter spec --require babel-register --timeout 4000",
+    "test:e2e": "npm run test:e2e-single",
+    "test:e2e:coverage": "nyc --produce-source-map=true npm run test:e2e",
+    "test:lint": "standard --fix"
+  },
+  "devDependencies": {
+    "chai": "^4.1.2",
+    "faker": "^4.1.0",
+    "mocha": "^4.0.1",
+    "rimraf": "^2.6.2",
+    "sync-files": "^1.0.3",
+    "syncano-test": "^0.3.3"
+  },
+  "standard": {
+    "globals": [
+      "describe",
+      "context",
+      "before",
+      "beforeEach",
+      "after",
+      "afterEach",
+      "it",
+      "expect"
+    ]
+  },
+  "babel": {
+    "presets": [
+      [
+        "env",
+        {
+          "targets": {
+            "node": "7"
+          }
+        }
+      ]
+    ],
+    "plugins": [
+      "transform-object-rest-spread"
+    ]
+  }
+}
