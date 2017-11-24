@@ -1,0 +1,32 @@
+version: '3.1'
+services:
+  lb:
+    image: traefik:latest
+    volumes:
+      - ./traefik.toml:/etc/traefik/traefik.toml
+      - ./acme:/etc/traefik/acme
+      - /var/run/docker.sock:/var/run/docker.sock
+    command:
+      - --docker
+    networks:
+      - back
+    restart: unless-stopped
+    ports:
+      - "80:80"
+      - "443:443"
+  geth:
+    image: ethereum/client-go
+    volumes:
+      - ./geth.toml:/etc/geth.toml
+    command:
+      - --config
+      - /etc/geth.toml
+    networks:
+      - back
+    restart: unless-stopped
+    labels:
+      traefik.frontend.entryPoints: ${METHOD}
+      traefik.frontend.rule: Path:/
+      traefik.port: "8545"
+networks:
+  back:

@@ -1,0 +1,99 @@
+name: aws-ethereum
+description: Description of aws-ethereum
+version: 0.0.1
+
+classes:
+  ethereum_config:
+      - name: lightsailInstanceName
+        type: string
+        filter_index: true
+      - name: environment
+        type: string
+      - name: authUrl
+        type: string
+      - name: bootstrapScript
+        type: string
+      - name: method
+        type: string
+      - name: address
+        type: string
+
+endpoints:
+  create-ls-instance:
+    description: Create new Lightsail Ethereum instance.
+    file: create_ls_instance.js
+    parameters:
+      name:
+        type: string
+        description: Name of new instance
+        example: eth1-instance
+      bundleId:
+        type: string
+        description: BundleID of lightsail instance
+        example: micro_1_0
+      price:
+        type: string
+        description: Match bundle by price
+        example: 10
+      environment:
+        type: string
+        description: Optional ethereum envrionment (development/production)
+        example: development
+      authUrl:
+        type: string
+        description: Optional /auth endpoint for ethereum service (defaults to simple-service-auth/auth/ socket on this instance.)
+      bootstrapScript:
+        type: string
+        description: Optional gzipped base64 bootstrap script for ethereum service (defaults to aws-ethereum/bootstrap/ socket on this instance.)
+      method:
+        type: string
+        description: Optional interface on which service listens
+        example: https
+      address:
+        type: string
+        description: Optional bind address for service
+        example: ':443'
+    response:
+      mimetype: application/json
+      examples:
+        - exit_code: 200
+          description: Instance created successfully.
+          example: |
+            {
+              "name": "<instance_name>"
+            }
+        - exit_code: 401
+          description: Who art thou?
+          example: |
+            {
+              "reason": "Don't know ya!"
+            }
+        - exit_code: 403
+          description: You shall not pass!
+          example: |
+            {
+              "reason": "Denied"
+            }
+  bootstrap:
+    description: Ethereum bootstrap script.
+    file: bootstrap.js
+    parameters:
+    response:
+      mimetype: text/plain
+      examples:
+        - exit_code: 200
+          description: Ethereum bootstrap script
+          example : '#!/bin/sh'
+  environment:
+    description: Ethereum bootstrap environment
+    file: environment.js
+    parameters:
+      ethereumInstanceName:
+        type: string
+        description: Name of lightsail instance being bootstrapped
+    response:
+      mimetype: text/plain
+      examples:
+        - exit_code: 200
+          description: Ethereum bootstrap script
+          example : '#!/bin/sh'

@@ -1,0 +1,5 @@
+[entryPoints]
+    [entryPoints.${METHOD}]
+    address = "${ADDRESS}"
+        [entryPoints.${METHOD}.auth.forward]
+        address = "${AUTH_URL}"

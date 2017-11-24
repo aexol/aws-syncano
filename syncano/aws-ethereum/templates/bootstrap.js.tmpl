@@ -1,0 +1,6 @@
+import Server from 'syncano-server';
+import atob from 'atob';
+const bootstrap_gz_b64 = '{{bootstrap}}';
+export default async ctx => {
+  return Server(ctx).response(bootstrap_gz_b64, 200, 'text/plain', {});
+};

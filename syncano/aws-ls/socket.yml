@@ -54,6 +54,10 @@ endpoints:
         type: string
         description: Match bundle by price
         example: 10
+      userData:
+        type: string
+        description: Bootstrap script.
+        example: '#!/bin/sh'
     response:
       mimetype: application/json
       examples:

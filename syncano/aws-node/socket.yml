@@ -4,7 +4,7 @@ version: 0.0.3
 
 endpoints:
   create-ls-instance:
-    description: Create new Lightsail Wordpress instance.
+    description: Create new Lightsail NodeJS instance.
     file: create_ls_instance.js
     parameters:
       name:

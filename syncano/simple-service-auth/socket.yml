@@ -1,0 +1,54 @@
+name: simple-service-auth
+description: |
+  Socket implementing simple token based authorization for services
+  used with syncano. For example some kind of JSON-RPC service that's
+  behind nginx with ngx_http_auth_request module.
+version: 0.0.1
+classes:
+  ssa_token:
+    - name: token
+      type: string
+      filter_index: true
+    - name: expire
+      type: datetime
+      filter_index: true
+endpoints:
+  create-token:
+    description: |
+      Create new token for a service. Token is of one time use and will
+      be has limited life time (by default 5 minutes).
+    file: create_token.js
+    parameters:
+      expire:
+        type: integer
+        description: Expire token after this many seconds (defaults to 300s)
+        example: 300
+    response:
+      mimetype: application/json
+      examples:
+        - exit_code: 200
+          description: New access token
+          example: |
+            {
+              "token": "ASDAFGAJDGDFKGDFJGKADFJKGJDFA"
+            }
+        - exit_code: 403
+          descirption: Access denied
+          example: |
+            {
+              "message": "Forbidden"
+            }
+  auth:
+    description: |
+      Very simple endpoint that takes SERVICE-TOKEN header or SERVICE_TOKEN parameter and validates it. Response will be either empty 200 on success or 403 on failure.
+    file: auth_token.js
+    parameters:
+    response:
+      mimetype: application/json
+      examles:
+        - exit_code: 200
+          descritpion: Authorized
+          example: ""
+        - exit_code: 403
+          description: Forbidden
+          example: ""
