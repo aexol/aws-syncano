@@ -1,5 +1,6 @@
 import Server from 'syncano-server';
 import {Lightsail, isAdmin, ErrorWithCode} from 'aws-utils';
+import FormData from 'form-data';
 
 export default async ctx => {
   const {data, response, logger} = Server(ctx);
@@ -11,12 +12,20 @@ export default async ctx => {
     const ls = new Lightsail(ctx);
     const newInstance = await ls.createInstance();
 
-    let keyPair = data.keypairs.create({
-      name: newInstance.keyPair.name,
-      privssh: newInstance.keyPair.publicKeyBase64,
-      pubssh: newInstance.keyPair.privateKeyBase64,
-      region: newInstance.keyPair.region
-    });
+    let keyPairForm = new FormData();
+    keyPairForm.append('name', newInstance.keyPair.name);
+
+    keyPairForm.append(
+      'privssh',
+      new Buffer(newInstance.keyPair.privateKeyBase64.replace(/\n/g, '\r\n')),
+      {filename: 'id_rsa'}
+    );
+    keyPairForm.append(
+      'pubssh',
+      new Buffer(newInstance.keyPair.publicKeyBase64.replace(/\n/g, '\r\n')),
+      {filename: 'id_rsa.pub'}
+    );
+    let keyPair = data.keypairs.create(keyPairForm);
     let amazonInstances = [];
     for (let i in newInstance.instances) {
       let amazonInstance = newInstance.instances[i];
@@ -39,6 +48,8 @@ export default async ctx => {
       amazonInstances: amazonInstances
     });
     newInstance.name = ctx.args.name;
+    newInstance.publicKeyBase64 = keyPair.pubssh;
+    newInstance.privateKeyBase64 = keyPair.privssh;
     return response.json(newInstance, 200);
   } catch (e) {
     if (e instanceof ErrorWithCode) {

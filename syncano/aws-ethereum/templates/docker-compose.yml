@@ -4,7 +4,7 @@ services:
     image: traefik:latest
     volumes:
       - ./traefik.toml:/etc/traefik/traefik.toml
-      - ./acme:/etc/traefik/acme
+      - ./acme.json:/acme.json
       - /var/run/docker.sock:/var/run/docker.sock
     command:
       - --docker
@@ -12,8 +12,7 @@ services:
       - back
     restart: unless-stopped
     ports:
-      - "80:80"
-      - "443:443"
+      - "${PORT}:${PORT}"
   geth:
     image: ethereum/client-go
     volumes:
@@ -25,8 +24,8 @@ services:
       - back
     restart: unless-stopped
     labels:
-      traefik.frontend.entryPoints: ${METHOD}
-      traefik.frontend.rule: Path:/
+      traefik.frontend.entryPoints: ${ENTRYPOINT}
+      traefik.frontend.rule: ${FRONTEND_RULE}
       traefik.port: "8545"
 networks:
   back:

@@ -8,9 +8,9 @@ classes:
       type: string
       filter_index: true
     - name: pubssh
-      type: text
+      type: file
     - name: privssh
-      type: text
+      type: file
     - name: region
       type: string
   amazon_instances:

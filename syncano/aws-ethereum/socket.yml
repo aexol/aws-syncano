@@ -13,9 +13,11 @@ classes:
         type: string
       - name: bootstrapScript
         type: string
-      - name: method
+      - name: entrypoint
         type: string
-      - name: address
+      - name: domain
+        type: string
+      - name: email
         type: string
 
 endpoints:
@@ -45,14 +47,18 @@ endpoints:
       bootstrapScript:
         type: string
         description: Optional gzipped base64 bootstrap script for ethereum service (defaults to aws-ethereum/bootstrap/ socket on this instance.)
-      method:
+      entrypoint:
         type: string
         description: Optional interface on which service listens
         example: https
-      address:
+      domain:
         type: string
-        description: Optional bind address for service
-        example: ':443'
+        description: Optional domain for etherum instance. Needed for https encryption.
+        example: 'ethereum.example.com'
+      email:
+        type: string
+        description: Optional autho email for etherum instance. Needed for https encryption.
+        example: 'admin@example.com'
     response:
       mimetype: application/json
       examples:
@@ -95,5 +101,5 @@ endpoints:
       mimetype: text/plain
       examples:
         - exit_code: 200
-          description: Ethereum bootstrap script
+          description: Ethereum environment variables
           example : '#!/bin/sh'

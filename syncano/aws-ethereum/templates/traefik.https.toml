@@ -1,0 +1,12 @@
+[entryPoints]
+    [entryPoints.https]
+    address = ":443"
+        [entryPoints.https.auth.forward]
+        address = "${AUTH_URL}"
+    [entryPoints.https.tls]
+[acme]
+    email = "${EMAIL}"
+    storage = "/acme.json"
+    entryPoint = https
+    onDemand = true
+    onHostRule = true

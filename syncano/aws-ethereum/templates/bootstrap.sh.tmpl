@@ -75,6 +75,24 @@ installDeps() {
 }
 
 compose() {
+    case "${ENTRYPOINT}" in
+
+    # Prepare http lb
+    "http")
+        export PORT="80"
+        ;;
+
+    # Prepare https lb
+    "https")
+        export PORT="443"
+        ;;
+
+    # Unsupported
+    *)
+        echo "Invalid entry point. Only http and https supported" 1>&2
+        exit 1
+    ;;
+    esac
     cat << EOF
 {{compose}}
 EOF
@@ -101,15 +119,37 @@ gethToml() {
 }
 
 traefikToml() {
-    cat << EOF
-{{traefik}}
+    case "${ENTRYPOINT}" in
+
+    # Prepare http lb
+    "http")
+        export PORT="80"
+        cat << EOF
+{{traefikHttp}}
 EOF
+    ;;
+
+    # Prepare https lb
+    "https")
+        export PORT="443"
+        cat << EOF
+{{traefikHttps}}
+EOF
+    ;;
+
+    # Unsupported
+    *)
+        echo "Invalid entry point. Only http and https supported" 1>&2
+        exit 1
+    ;;
+    esac
 }
 
 createComposeContext() {
-    cd ${HOME}
-    mkdir -p ${restGethPath} && cd ${restGethPath}
-    mkdir -p acme
+    mkdir -p ${restGethPath}
+    cd ${restGethPath}
+    touch acme.json
+    chmod 600 acme.json
     compose > docker-compose.yml
     gethToml > geth.toml
     traefikToml > traefik.toml
@@ -122,10 +162,6 @@ startDocker() {
 startGeth() {
     cd ${restGethPath}
     docker-compose up -d
-}
-
-awsPublicHostname() {
-    echo "$(curl http://169.254.169.254/latest/meta-data/public-hostname)"
 }
 
 installDeps

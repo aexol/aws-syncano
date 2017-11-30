@@ -13,8 +13,9 @@ export default async ctx => {
     environment: 'development',
     authUrl: defaultAuth(ctx, instance),
     bootstrapScript: defaultBootstrap(ctx, instance),
-    method: 'https',
-    address: ':443'
+    entrypoint: 'https',
+    domain: '',
+    email: ''
   };
   const {ethereumInstanceName} = ctx.args;
   if (ethereumInstanceName) {
@@ -43,15 +44,23 @@ export default async ctx => {
       400
     );
   }
-  return response(
-    `export ENVIRONMENT="${config.environment}"
+  let baseEnv = `export ENVIRONMENT="${config.environment}"
 export AUTH_URL="${config.authUrl}"
 export BOOTSTRAP_SCRIPT="${config.bootstrapScript}"
-export METHOD="${config.method}"
-export ADDRESS="${config.address}"
-`,
-    200,
-    'text/plain',
-    {}
-  );
+export ENTRYPOINT="${config.entrypoint}"
+`;
+  // EXPORT domain if configured
+  if (config.domain) {
+    baseEnv = `${baseEnv}export FRONTEND_RULE="Host:${config.domain}"
+`;
+  } else {
+    baseEnv = `${baseEnv}export FRONTEND_RULE="Path:/"
+`;
+  }
+  // EXPORT email if configured
+  if (config.email) {
+    baseEnv = `export EMAIL="${config.email}"
+`;
+  }
+  return response(baseEnv, 200, 'text/plain', {});
 };

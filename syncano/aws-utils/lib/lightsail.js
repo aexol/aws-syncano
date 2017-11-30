@@ -173,6 +173,7 @@ class Lightsail {
         zone: aZone
       });
       let params = {
+        keyPairName: keyPair.name,
         availabilityZone: aZone,
         blueprintId: blueprintId,
         bundleId: bundleId,

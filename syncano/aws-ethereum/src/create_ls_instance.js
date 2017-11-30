@@ -18,9 +18,15 @@ export default async ctx => {
       envrionment = 'development',
       authUrl = defaultAuth(ctx, instance),
       bootstrapScript = defaultBootstrap(ctx, instance),
-      method = 'https',
-      address = ':443'
+      entrypoint = 'http',
+      domain = '',
+      email = ''
     } = args;
+    if (entrypoint === 'https') {
+      if (!domain || !email) {
+        return response.json('Domain and email are required when using https.');
+      }
+    }
     args.userData = `#!/bin/sh
 apt -y update && apt -y install curl
 curl -X GET ${defaultEnvironment(ctx, instance)} > /env.sh
@@ -32,17 +38,19 @@ chmod +x /bootstrap.sh
     args.blueprintGroup = 'ubuntu';
     args.blueprintVersion = '16.04 LTS';
     try {
-      const resp = await socket.post('aws-ls/create-ls-instance', args);
+      // Create config for etherum instance.
       await data.ethereum_config.create({
         lightsailInstanceName: ctx.args.name,
         envrionment: envrionment,
         bootstrapScript: bootstrapScript,
-        method: method,
-        address: addres
+        entrypoint: entrypoint,
+        domain: domain,
+        email: email
       });
+      const resp = await socket.post('aws-ls/create-ls-instance', args);
       return response.json(resp);
     } catch (e) {
-      return response.json(e.response.data, e.response.status);
+      return response.json(e);
     }
   } catch (e) {
     if (e instanceof ErrorWithCode) {
