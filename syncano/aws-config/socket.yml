@@ -1,7 +1,6 @@
 name: aws-config
 description: Description of aws-config
-version: 0.0.3
-
+version: 0.0.5
 classes:
   aws_id:
     - name: AWS_ACCESS_KEY_ID
@@ -20,12 +19,12 @@ endpoints:
     parameters:
       AWS_ACCESS_KEY_ID:
         type: string
-        description: "New access key."
+        description: New access key.
       AWS_SECRET_ACCESS_KEY:
-        description: "New secret access key."
+        description: New secret access key.
         type: string
       REGION:
-        description: "AWS region for instance."
+        description: AWS region for instance.
         type: string
     response:
       mimetype: application/json

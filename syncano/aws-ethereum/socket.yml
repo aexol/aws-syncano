@@ -1,25 +1,23 @@
 name: aws-ethereum
 description: Description of aws-ethereum
-version: 0.0.1
-
+version: 0.0.3
 classes:
   ethereum_config:
-      - name: lightsailInstanceName
-        type: string
-        filter_index: true
-      - name: environment
-        type: string
-      - name: authUrl
-        type: string
-      - name: bootstrapScript
-        type: string
-      - name: entrypoint
-        type: string
-      - name: domain
-        type: string
-      - name: email
-        type: string
-
+    - name: lightsailInstanceName
+      type: string
+      filter_index: true
+    - name: environment
+      type: string
+    - name: authUrl
+      type: string
+    - name: bootstrapScript
+      type: string
+    - name: entrypoint
+      type: string
+    - name: domain
+      type: string
+    - name: email
+      type: string
 endpoints:
   create-ls-instance:
     description: Create new Lightsail Ethereum instance.
@@ -43,10 +41,14 @@ endpoints:
         example: development
       authUrl:
         type: string
-        description: Optional /auth endpoint for ethereum service (defaults to simple-service-auth/auth/ socket on this instance.)
+        description: >-
+          Optional /auth endpoint for ethereum service (defaults to
+          simple-service-auth/auth/ socket on this instance.)
       bootstrapScript:
         type: string
-        description: Optional gzipped base64 bootstrap script for ethereum service (defaults to aws-ethereum/bootstrap/ socket on this instance.)
+        description: >-
+          Optional gzipped base64 bootstrap script for ethereum service
+          (defaults to aws-ethereum/bootstrap/ socket on this instance.)
       entrypoint:
         type: string
         description: Optional interface on which service listens
@@ -54,11 +56,13 @@ endpoints:
       domain:
         type: string
         description: Optional domain for etherum instance. Needed for https encryption.
-        example: 'ethereum.example.com'
+        example: ethereum.example.com
       email:
         type: string
-        description: Optional autho email for etherum instance. Needed for https encryption.
-        example: 'admin@example.com'
+        description: >-
+          Optional autho email for etherum instance. Needed for https
+          encryption.
+        example: admin@example.com
     response:
       mimetype: application/json
       examples:
@@ -83,13 +87,13 @@ endpoints:
   bootstrap:
     description: Ethereum bootstrap script.
     file: bootstrap.js
-    parameters:
+    parameters: null
     response:
       mimetype: text/plain
       examples:
         - exit_code: 200
           description: Ethereum bootstrap script
-          example : '#!/bin/sh'
+          example: '#!/bin/sh'
   environment:
     description: Ethereum bootstrap environment
     file: environment.js
@@ -102,4 +106,4 @@ endpoints:
       examples:
         - exit_code: 200
           description: Ethereum environment variables
-          example : '#!/bin/sh'
+          example: '#!/bin/sh'

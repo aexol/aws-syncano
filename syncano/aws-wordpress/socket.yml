@@ -1,7 +1,6 @@
 name: aws-wordpress
 description: Description of aws-wordpress
-version: 0.0.3
-
+version: 0.0.5
 endpoints:
   create-ls-instance:
     description: Create new Lightsail Wordpress instance.

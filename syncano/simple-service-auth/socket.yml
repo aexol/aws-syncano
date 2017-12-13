@@ -3,7 +3,7 @@ description: |
   Socket implementing simple token based authorization for services
   used with syncano. For example some kind of JSON-RPC service that's
   behind nginx with ngx_http_auth_request module.
-version: 0.0.1
+version: 0.0.3
 classes:
   ssa_token:
     - name: token
@@ -39,16 +39,18 @@ endpoints:
               "message": "Forbidden"
             }
   auth:
-    description: |
-      Very simple endpoint that takes SERVICE-TOKEN header or SERVICE_TOKEN parameter and validates it. Response will be either empty 200 on success or 403 on failure.
+    description: >
+      Very simple endpoint that takes SERVICE-TOKEN header or SERVICE_TOKEN
+      parameter and validates it. Response will be either empty 200 on success
+      or 403 on failure.
     file: auth_token.js
-    parameters:
+    parameters: null
     response:
       mimetype: application/json
       examles:
         - exit_code: 200
           descritpion: Authorized
-          example: ""
+          example: ''
         - exit_code: 403
           description: Forbidden
-          example: ""
+          example: ''

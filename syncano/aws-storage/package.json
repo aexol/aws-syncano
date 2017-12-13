@@ -1,15 +1,16 @@
 {
   "license": "MIT",
   "dependencies": {
-    "syncano-server": "beta",
     "aws-bluebird": "^1.0.0",
-    "semver": "^5.4.1"
+    "copyfiles": "^1.2.0",
+    "semver": "^5.4.1",
+    "syncano-server": "beta"
   },
   "scripts": {
-    "sync-utils": "if [ -e ../aws-utils ] && [ -e ../merge_deps.js ]; then node ../merge_deps.js aws-utils/package.json; fi",
-    "sync-deps": "if [ -e ../aws-utils ] && [ -e node_modules/.bin/sync-files ]; then node_modules/.bin/sync-files ../aws-utils/lib src/aws-utils; fi",
-    "preinstall": "npm run sync-utils",
-    "postinstall": "npm run sync-deps",
+    "sync-deps": "if [ -e ../aws-utils ] && [ -e ../merge_deps.js ]; then node ../merge_deps.js aws-utils/package.json; fi",
+    "sync-utils": "if [ -e ../aws-utils ] && [ -e node_modules/.bin/copyfiles ]; then node_modules/.bin/copyfiles -e '../aws-utils/lib/*.test.js' -f ../aws-utils/lib/*.js src/aws-utils; fi",
+    "preinstall": "npm run sync-deps",
+    "postinstall": "npm run sync-utils",
     "test": "yarn  && npm run test:lint && npm run test:e2e:coverage",
     "test:e2e-single": "cross-env NODE_ENV=test mocha -s 1800 --reporter spec --require babel-register --timeout 10000",
     "test:e2e-single:coverage": "nyc --produce-source-map=true cross-env NODE_ENV=test mocha -s 1800 --reporter spec --require babel-register --timeout 4000",
@@ -25,7 +26,6 @@
     "faker": "^4.1.0",
     "mocha": "^4.0.1",
     "rimraf": "^2.6.2",
-    "sync-files": "^1.0.3",
     "syncano-test": "^0.3.3"
   },
   "standard": {

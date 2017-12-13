@@ -1,7 +1,6 @@
 name: aws-ls
 description: Description of aws-ls
-version: 0.0.3
-
+version: 0.0.5
 classes:
   keypairs:
     - name: name

@@ -1,7 +1,6 @@
 name: aws-storage
 description: Description of aws-storage
-version: 0.0.5
-
+version: 0.0.8
 config:
   EXPIRE:
     description: |
@@ -12,7 +11,7 @@ classes:
     - name: name
       type: string
       filter_index: true
-    - name: region 
+    - name: region
       type: string
       filter_index: true
 endpoints:
@@ -89,7 +88,9 @@ endpoints:
       fileNames:
         type: array
         description: List of files for links.
-        example: ['example1.txt', 'example2.txt']
+        example:
+          - example1.txt
+          - example2.txt
     response:
       mimetype: application/json
       examples:
@@ -107,7 +108,7 @@ endpoints:
               'message': 'Forbidden'
             }
         - exit_code: 500
-          description: Well, that went badly.
+          description: 'Well, that went badly.'
           example: |
             {
               'message': 'Internal Server Error'

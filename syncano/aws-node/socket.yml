@@ -1,7 +1,6 @@
 name: aws-node
 description: Description of aws-node
-version: 0.0.3
-
+version: 0.0.5
 endpoints:
   create-ls-instance:
     description: Create new Lightsail NodeJS instance.

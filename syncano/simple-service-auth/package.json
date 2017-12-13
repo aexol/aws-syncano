@@ -1,10 +1,10 @@
 {
   "license": "MIT",
   "scripts": {
-    "sync-utils": "if [ -e ../aws-utils ] && [ -e ../merge_deps.js ]; then node ../merge_deps.js aws-utils/package.json; fi",
-    "sync-deps": "if [ -e ../aws-utils ] && [ -e node_modules/.bin/sync-files ]; then node_modules/.bin/sync-files ../aws-utils/lib src/aws-utils; fi",
-    "preinstall": "npm run sync-utils",
-    "postinstall": "npm run sync-deps"
+    "sync-deps": "if [ -e ../aws-utils ] && [ -e ../merge_deps.js ]; then node ../merge_deps.js aws-utils/package.json; fi",
+    "sync-utils": "if [ -e ../aws-utils ] && [ -e node_modules/.bin/copyfiles ]; then node_modules/.bin/copyfiles -e '../aws-utils/lib/*.test.js' -f ../aws-utils/lib/*.js src/aws-utils; fi",
+    "preinstall": "npm run sync-deps",
+    "postinstall": "npm run sync-utils"
   },
   "dependencies": {
     "aws-bluebird": "^1.0.0",
@@ -12,6 +12,6 @@
     "syncano-server": "beta"
   },
   "devDependencies": {
-    "sync-files": "^1.0.3"
+    "copyfiles": "^1.2.0"
   }
 }
