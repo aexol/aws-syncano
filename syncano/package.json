@@ -16,7 +16,7 @@
   "scripts": {
     "list-sockets": "npx s list |grep '^\\s*socket:' | sed 's/\\s*socket: //'",
     "bump-utils": "for socket in $(npm run -s list-sockets); do cd $socket; npm run sync-deps && npm run sync-utils && cd ..; done",
-    "bump-all-socket-versions": "npm run bupm-utils && for socket in $(npm run -s list-sockets); do npx s submit -b patch $socket; done",
+    "bump-all-socket-versions": "npm run bump-utils && for socket in $(npm run -s list-sockets); do npx s submit -b patch $socket; done",
     "publish-all-sockets": "npm run bump-all-socket-versions && for socket in $(npm run -s list-sockets); do npx s publish $socket; done",
     "deploy": "npm run build && npx s deploy",
     "hot": "npx s hot",
