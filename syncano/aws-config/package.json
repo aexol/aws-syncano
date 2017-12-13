@@ -4,19 +4,17 @@
   "license": "MIT",
   "main": "src/index.js",
   "scripts": {
-    "bootstrap-dev": "sh -c 'cd ../aws-config && yarn install --ignore-scripts --production=false'",
-    "sync-aws-utils": "mkdir -p node_modules/aws-utils && ../aws-config/node_modules/.bin/sync-files ../aws-utils node_modules/aws-utils",
-    "sync-local": "npm run sync-aws-utils",
-    "clean-aws-utils": "../aws-config/node_modules/.bin/rimraf node_modules/aws-utils/node_modules",
-    "clean-local": "npm run clean-aws-utils",
-    "postinstall": "npm run bootstrap-dev && npm run clean-aws-utils"
+    "sync-utils": "if [ -e ../aws-utils ] && [ -e ../merge_deps.js ]; then node ../merge_deps.js aws-utils/package.json; fi",
+    "sync-deps": "if [ -e ../aws-utils ] && [ -e node_modules/.bin/sync-files ]; then node_modules/.bin/sync-files ../aws-utils/lib src/aws-utils; fi",
+    "preinstall": "npm run sync-utils",
+    "postinstall": "npm run sync-deps"
   },
   "dependencies": {
-    "aws-utils": "file:../aws-utils",
-    "syncano-server": "beta"
+    "syncano-server": "beta",
+    "aws-bluebird": "^1.0.0",
+    "semver": "^5.4.1"
   },
   "devDependencies": {
-    "rimraf": "^2.6.2",
     "sync-files": "^1.0.3"
   }
 }

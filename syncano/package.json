@@ -4,15 +4,22 @@
   "description": "AWS endpoints syncano",
   "main": "index.js",
   "license": "MIT",
+  "sockets": [
+    "aws-config",
+    "aws-ethereum",
+    "aws-ls",
+    "aws-node",
+    "aws-storage",
+    "aws-wordpress",
+    "simple-service-auth"
+  ],
   "scripts": {
+    "list-sockets": "npx s list |grep '^\\s*socket:' | sed 's/\\s*socket: //'",
+    "bump-utils": "for socket in $(npm run -s list-sockets); do cd $socket; npm run sync-utils && npm run sync-deps && cd ..; done",
     "deploy": "npm run build && npx s deploy",
     "hot": "npx s hot",
-    "prepublish": "npm run build",
-    "prebuild": "rimraf ./aws-utils/src",
-    "precommit": "lint-staged",
-    "build": "babel ./aws-utils/lib --out-dir ./aws-utils/src --ignore '**/*.test.js,**/__mocks__'",
     "lint": "standard --fix --env mocha --parser babel-eslint aws-config/src/**/* aws-storage/src/**/* aws-utils/lib/**/* aws-ls/src/**/* aws-wordpress/src/**/* aws-node/src/**/*",
-    "format": "prettier --write --single-quote --no-semi --no-bracket-spacing *.js aws-config/{src,test}/**/*.js aws-storage/{src,test}/**/*.js aws-utils/{lib,test}/**/*.js aws-ls/{src,test}/**/*.js aws-wordpress/{src,test}/**/*.js aws-node/{src,test}/**/*.js"
+    "format": "prettier --write --single-quote --no-bracket-spacing *.js aws-config/{src,test}/**/*.js aws-storage/{src,test}/**/*.js aws-utils/{lib,test}/**/*.js aws-ls/{src,test}/**/*.js aws-wordpress/{src,test}/**/*.js aws-node/{src,test}/**/*.js"
   },
   "lint-staged": {
     "*.js": [
@@ -43,9 +50,11 @@
     "prettier": "^1.7.4",
     "ps-node": "^0.1.6",
     "rimraf": "^2.6.2",
+    "shelljs": "^0.7.8",
     "sleep": "^5.1.1",
     "standard": "^10.0.3",
     "sync-files": "^1.0.3",
     "syncano-cli": "^0.53.0"
-  }
+  },
+  "dependencies": {}
 }

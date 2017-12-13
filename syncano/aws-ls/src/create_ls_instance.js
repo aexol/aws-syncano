@@ -1,5 +1,5 @@
 import Server from 'syncano-server';
-import {Lightsail, isAdmin, ErrorWithCode} from 'aws-utils';
+import {Lightsail, isAdmin, ErrorWithCode} from './aws-utils/index';
 import FormData from 'form-data';
 
 export default async ctx => {

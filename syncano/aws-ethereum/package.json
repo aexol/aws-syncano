@@ -1,27 +1,19 @@
 {
   "license": "MIT",
   "scripts": {
-    "bootstrap-dev": "sh -c 'cd ../aws-ethereum && yarn install --ignore-scripts --production=false'",
-    "sync-aws-utils": "mkdir -p node_modules/aws-utils && ../aws-ethereum/node_modules/.bin/sync-files ../aws-utils node_modules/aws-utils",
-    "sync-local": "npm run sync-aws-utils",
-    "clean-aws-utils": "../aws-ethereum/node_modules/.bin/rimraf node_modules/aws-utils/node_modules",
-    "clean-local": "npm run clean-aws-utils",
-    "make_bootstrap_sh": "npx handlebars --compose \"$(npx cat templates/docker-compose.yml)\" --gethDev \"$(npx cat templates/eth-test.toml)\" --geth \"$(npx cat templates/eth.toml)\" --traefikHttp \"$(npx cat templates/traefik.http.toml)\" --traefikHttps \"$(npx cat templates/traefik.https.toml)\" < templates/bootstrap.sh.tmpl | sed \"s/&#x27;/'/g\" | sed 's/&quot;/\"/g'",
-    "encode_bootstrap_sh": "npm run -s make_bootstrap_sh | gzip | base64 -w 0",
-    "make_bootstrap_js": "npx handlebars --bootstrap \"$(npm run -s encode_bootstrap_sh)\" < templates/bootstrap.js.tmpl > src/bootstrap.js",
-    "build": "npm run make_bootstrap_js",
-    "postinstall": "npm run bootstrap-dev && npm run sync-local && npm run clean-local && ../aws-ethereum/node_modules/.bin/postinstall-build src/bootstrap.js"
+    "sync-utils": "if [ -e ../aws-utils ] && [ -e ../merge_deps.js ]; then node ../merge_deps.js aws-utils/package.json; fi",
+    "sync-deps": "if [ -e ../aws-utils ] && [ -e node_modules/.bin/sync-files ]; then node_modules/.bin/sync-files ../aws-utils/lib src/aws-utils; fi",
+    "preinstall": "npm run sync-utils",
+    "postinstall": "npm run sync-deps"
   },
   "dependencies": {
     "atob": "^2.0.3",
-    "aws-utils": "file:../aws-utils",
     "node-fetch": "^1.7.3",
-    "syncano-server": "^1.0.1-13"
+    "syncano-server": "beta",
+    "aws-bluebird": "^1.0.0",
+    "semver": "^5.4.1"
   },
   "devDependencies": {
-    "handlebars-cmd": "^0.1.4",
-    "postinstall-build": "^5.0.1",
-    "rimraf": "^2.6.2",
     "sync-files": "^1.0.3"
   }
 }

@@ -1,5 +1,5 @@
 import Server from 'syncano-server';
-import {isAdmin, ErrorWithCode} from 'aws-utils';
+import {isAdmin, ErrorWithCode} from './aws-utils/index';
 import {
   defaultEnvironment,
   defaultBootstrap,

@@ -96,8 +96,8 @@ aws-bluebird@^1.0.0:
     debug "^2.2.0"
 
 aws-sdk@^2.2.3:
-  version "2.149.0"
-  resolved "https://registry.yarnpkg.com/aws-sdk/-/aws-sdk-2.149.0.tgz#76f53722a7780bdb3191e83f27c10108c6fe9813"
+  version "2.169.0"
+  resolved "https://registry.yarnpkg.com/aws-sdk/-/aws-sdk-2.169.0.tgz#c2d72737a30afb9a64f7ceb88ff1d5367f8eeb69"
   dependencies:
     buffer "4.9.1"
     crypto-browserify "1.0.9"
@@ -113,13 +113,6 @@ aws-sdk@^2.2.3:
 aws-sign2@~0.6.0:
   version "0.6.0"
   resolved "https://registry.yarnpkg.com/aws-sign2/-/aws-sign2-0.6.0.tgz#14342dd38dbcc94d0e5b87d763cd63612c0e794f"
-
-"aws-utils@file:../aws-utils":
-  version "0.0.59"
-  dependencies:
-    aws-bluebird "^1.0.0"
-    semver "^5.4.1"
-    syncano-server beta
 
 aws4@^1.2.1:
   version "1.6.0"
@@ -1069,7 +1062,7 @@ request@2.81.0:
     tunnel-agent "^0.6.0"
     uuid "^3.0.0"
 
-rimraf@2, rimraf@^2.2.8, rimraf@^2.5.1, rimraf@^2.6.1, rimraf@^2.6.2:
+rimraf@2, rimraf@^2.2.8, rimraf@^2.5.1, rimraf@^2.6.1:
   version "2.6.2"
   resolved "https://registry.yarnpkg.com/rimraf/-/rimraf-2.6.2.tgz#2ed8150d24a16ea8651e6d6ef0f47c4158ce7a36"
   dependencies:

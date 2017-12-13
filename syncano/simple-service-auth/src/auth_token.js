@@ -1,5 +1,5 @@
 import Server from 'syncano-server';
-import {isAdmin, ErrorWithCode} from 'aws-utils';
+import {isAdmin, ErrorWithCode} from './aws-utils/index';
 
 // Simply returns 200 OK if everything went ok
 // Anything else, including any kind of error

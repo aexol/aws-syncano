@@ -143,8 +143,8 @@ aws-bluebird@^1.0.0:
     debug "^2.2.0"
 
 aws-sdk@^2.2.3:
-  version "2.149.0"
-  resolved "https://registry.yarnpkg.com/aws-sdk/-/aws-sdk-2.149.0.tgz#76f53722a7780bdb3191e83f27c10108c6fe9813"
+  version "2.169.0"
+  resolved "https://registry.yarnpkg.com/aws-sdk/-/aws-sdk-2.169.0.tgz#c2d72737a30afb9a64f7ceb88ff1d5367f8eeb69"
   dependencies:
     buffer "4.9.1"
     crypto-browserify "1.0.9"
@@ -160,13 +160,6 @@ aws-sdk@^2.2.3:
 aws-sign2@~0.6.0:
   version "0.6.0"
   resolved "http://localhost:4873/aws-sign2/-/aws-sign2-0.6.0.tgz#14342dd38dbcc94d0e5b87d763cd63612c0e794f"
-
-"aws-utils@file:../aws-utils":
-  version "0.0.59"
-  dependencies:
-    aws-bluebird "^1.0.0"
-    semver "^5.4.1"
-    syncano-server beta
 
 aws4@^1.2.1:
   version "1.6.0"
@@ -1504,7 +1497,7 @@ is-utf8@^0.2.0:
 
 isarray@1.0.0, isarray@^1.0.0, isarray@~1.0.0:
   version "1.0.0"
-  resolved "http://localhost:4873/isarray/-/isarray-1.0.0.tgz#bb935d48582cba168c06834957a54a3e07124f11"
+  resolved "https://registry.yarnpkg.com/isarray/-/isarray-1.0.0.tgz#bb935d48582cba168c06834957a54a3e07124f11"
 
 isexe@^2.0.0:
   version "2.0.0"
@@ -1698,7 +1691,7 @@ lodash@^3.1.0:
 
 lodash@^4.0.0, lodash@^4.17.4:
   version "4.17.4"
-  resolved "http://localhost:4873/lodash/-/lodash-4.17.4.tgz#78203a4d1c328ae1d86dca6460e369b57f4055ae"
+  resolved "https://registry.yarnpkg.com/lodash/-/lodash-4.17.4.tgz#78203a4d1c328ae1d86dca6460e369b57f4055ae"
 
 longest@^1.0.1:
   version "1.0.1"
@@ -2314,7 +2307,7 @@ right-align@^0.1.1:
   dependencies:
     align-text "^0.1.1"
 
-rimraf@2, rimraf@^2.2.8, rimraf@^2.3.3, rimraf@^2.5.1, rimraf@^2.5.4, rimraf@^2.6.1, rimraf@^2.6.2:
+rimraf@2, rimraf@^2.2.8, rimraf@^2.3.3, rimraf@^2.5.1, rimraf@^2.5.4, rimraf@^2.6.1:
   version "2.6.2"
   resolved "http://localhost:4873/rimraf/-/rimraf-2.6.2.tgz#2ed8150d24a16ea8651e6d6ef0f47c4158ce7a36"
   dependencies:
@@ -2340,7 +2333,7 @@ semver-diff@^2.0.0:
 
 "semver@2 || 3 || 4 || 5", semver@^5.0.3, semver@^5.3.0, semver@^5.4.1:
   version "5.4.1"
-  resolved "http://localhost:4873/semver/-/semver-5.4.1.tgz#e059c09d8571f0540823733433505d3a2f00b18e"
+  resolved "https://registry.yarnpkg.com/semver/-/semver-5.4.1.tgz#e059c09d8571f0540823733433505d3a2f00b18e"
 
 set-blocking@^2.0.0, set-blocking@~2.0.0:
   version "2.0.0"
@@ -2676,7 +2669,7 @@ util-deprecate@~1.0.1:
 
 uuid@3.1.0, uuid@^3.0.0:
   version "3.1.0"
-  resolved "http://localhost:4873/uuid/-/uuid-3.1.0.tgz#3dd3d3e790abc24d7b0d3a034ffababe28ebbc04"
+  resolved "https://registry.yarnpkg.com/uuid/-/uuid-3.1.0.tgz#3dd3d3e790abc24d7b0d3a034ffababe28ebbc04"
 
 uuid@^2.0.1:
   version "2.0.3"

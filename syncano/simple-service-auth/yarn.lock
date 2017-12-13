@@ -114,13 +114,6 @@ aws-sign2@~0.6.0:
   version "0.6.0"
   resolved "https://registry.yarnpkg.com/aws-sign2/-/aws-sign2-0.6.0.tgz#14342dd38dbcc94d0e5b87d763cd63612c0e794f"
 
-"aws-utils@file:../aws-utils":
-  version "0.0.59"
-  dependencies:
-    aws-bluebird "^1.0.0"
-    semver "^5.4.1"
-    syncano-server beta
-
 aws4@^1.2.1:
   version "1.6.0"
   resolved "https://registry.yarnpkg.com/aws4/-/aws4-1.6.0.tgz#83ef5ca860b2b32e4a0deedee8c771b9db57471e"
@@ -1069,7 +1062,7 @@ request@2.81.0:
     tunnel-agent "^0.6.0"
     uuid "^3.0.0"
 
-rimraf@2, rimraf@^2.2.8, rimraf@^2.5.1, rimraf@^2.6.1, rimraf@^2.6.2:
+rimraf@2, rimraf@^2.2.8, rimraf@^2.5.1, rimraf@^2.6.1:
   version "2.6.2"
   resolved "https://registry.yarnpkg.com/rimraf/-/rimraf-2.6.2.tgz#2ed8150d24a16ea8651e6d6ef0f47c4158ce7a36"
   dependencies:
@@ -1196,7 +1189,7 @@ sync-files@^1.0.3:
     minimist "^1.1.0"
     update-notifier "^0.3.0"
 
-syncano-server@^1.0.1-13, syncano-server@beta:
+syncano-server@beta:
   version "1.0.1-13"
   resolved "https://registry.yarnpkg.com/syncano-server/-/syncano-server-1.0.1-13.tgz#4df7bbd4afb7cdf0bf2ac14e909d3aa3563e9f0c"
   dependencies:
