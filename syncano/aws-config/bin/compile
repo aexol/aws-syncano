@@ -1,0 +1,6 @@
+#!/usr/bin/env sh
+
+mkdir -p .dist
+node ../merge_deps.js aws-utils/package.json
+copyfiles -e '../aws-utils/src/*.test.js' -f ../aws-utils/src/*.js src/aws-utils
+npx babel src --out-dir .dist/src --copy-files

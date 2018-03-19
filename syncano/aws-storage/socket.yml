@@ -1,6 +1,6 @@
 name: aws-storage
 description: Description of aws-storage
-version: 0.0.8
+version: 0.0.9
 config:
   EXPIRE:
     description: |
@@ -14,6 +14,9 @@ classes:
     - name: region
       type: string
       filter_index: true
+components:
+  aws-utils:
+    path: ../aws-utils
 endpoints:
   create_bucket:
     description: Creates amazon s3 bucket

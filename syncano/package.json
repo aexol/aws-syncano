@@ -37,6 +37,7 @@
     ]
   },
   "devDependencies": {
+    "@syncano/cli": "^0.11.0",
     "babel-cli": "^6.26.0",
     "babel-eslint": "^8.0.1",
     "babel-plugin-add-module-exports": "^0.2.1",
@@ -55,8 +56,7 @@
     "shelljs": "^0.7.8",
     "sleep": "^5.1.1",
     "standard": "^10.0.3",
-    "sync-files": "^1.0.3",
-    "syncano-cli": "^0.53.0"
+    "sync-files": "^1.0.3"
   },
   "dependencies": {}
 }

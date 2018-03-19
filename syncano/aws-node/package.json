@@ -6,10 +6,9 @@
     "syncano-server": "beta"
   },
   "scripts": {
-    "sync-deps": "if [ -e ../aws-utils ] && [ -e ../merge_deps.js ]; then node ../merge_deps.js aws-utils/package.json; fi",
-    "sync-utils": "if [ -e ../aws-utils ] && [ -e node_modules/.bin/copyfiles ]; then node_modules/.bin/copyfiles -e '../aws-utils/lib/*.test.js' -f ../aws-utils/lib/*.js src/aws-utils; fi",
-    "preinstall": "npm run sync-deps",
-    "postinstall": "npm run sync-utils",
+    "build": "npm run build:src && npm run build:env",
+    "build:src": "sh ./bin/compile",
+    "build:env": "sh ./bin/compile-env",
     "test": "yarn  && npm run test:lint && npm run test:e2e:coverage",
     "test:e2e-single": "cross-env NODE_ENV=test mocha -s 1800 --reporter spec --require babel-register --timeout 10000",
     "test:e2e-single:coverage": "nyc --produce-source-map=true cross-env NODE_ENV=test mocha -s 1800 --reporter spec --require babel-register --timeout 4000",

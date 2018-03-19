@@ -4,10 +4,9 @@
   "license": "MIT",
   "main": "src/index.js",
   "scripts": {
-    "sync-deps": "if [ -e ../aws-utils ] && [ -e ../merge_deps.js ]; then node ../merge_deps.js aws-utils/package.json; fi",
-    "sync-utils": "if [ -e ../aws-utils ] && [ -e node_modules/.bin/copyfiles ]; then node_modules/.bin/copyfiles -e '../aws-utils/lib/*.test.js' -f ../aws-utils/lib/*.js src/aws-utils; fi",
-    "preinstall": "npm run sync-deps",
-    "postinstall": "npm run sync-utils"
+    "build": "npm run build:src && npm run build:env",
+    "build:src": "sh ./bin/compile",
+    "build:env": "sh ./bin/compile-env"
   },
   "dependencies": {
     "aws-bluebird": "^1.0.0",
@@ -15,6 +14,22 @@
     "syncano-server": "beta"
   },
   "devDependencies": {
+    "babel-cli": "^6.26.0",
     "copyfiles": "^1.2.0"
+  },
+  "babel": {
+    "presets": [
+      [
+        "env",
+        {
+          "targets": {
+            "node": "8"
+          }
+        }
+      ]
+    ],
+    "plugins": [
+      "transform-object-rest-spread"
+    ]
   }
 }

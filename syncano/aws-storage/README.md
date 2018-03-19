@@ -20,7 +20,6 @@ So, it's pretty straightforward stuff, aws-storage depends on two sockets, aws-u
 Be careful, order in which you add them matters.
 
 ```
-npx s add aws-utils
 npx s add aws-config
 npx s add aws-storage
 ```

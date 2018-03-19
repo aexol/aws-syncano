@@ -1,10 +1,9 @@
 {
   "license": "MIT",
   "scripts": {
-    "sync-deps": "if [ -e ../aws-utils ] && [ -e ../merge_deps.js ]; then node ../merge_deps.js aws-utils/package.json; fi",
-    "sync-utils": "if [ -e ../aws-utils ] && [ -e node_modules/.bin/copyfiles ]; then node_modules/.bin/copyfiles -e '../aws-utils/lib/*.test.js' -f ../aws-utils/lib/*.js src/aws-utils; fi",
-    "preinstall": "npm run sync-deps",
-    "postinstall": "npm run sync-utils"
+    "build": "npm run build:src && npm run build:env",
+    "build:src": "sh ./bin/compile",
+    "build:env": "sh ./bin/compile-env"
   },
   "dependencies": {
     "atob": "^2.0.3",
@@ -15,5 +14,20 @@
   },
   "devDependencies": {
     "copyfiles": "^1.2.0"
+  },
+  "babel": {
+    "presets": [
+      [
+        "env",
+        {
+          "targets": {
+            "node": "8"
+          }
+        }
+      ]
+    ],
+    "plugins": [
+      "transform-object-rest-spread"
+    ]
   }
 }
