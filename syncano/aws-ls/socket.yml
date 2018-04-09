@@ -1,6 +1,6 @@
 name: aws-ls
 description: Description of aws-ls
-version: 0.0.5
+version: 0.0.9
 classes:
   keypairs:
     - name: name
@@ -78,3 +78,6 @@ endpoints:
             {
               "reason": "Denied"
             }
+dependencies:
+  aws-config:
+    version: 0.0.9

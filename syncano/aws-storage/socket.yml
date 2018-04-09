@@ -1,6 +1,6 @@
 name: aws-storage
 description: Description of aws-storage
-version: 0.0.9
+version: 0.0.16
 config:
   EXPIRE:
     description: |
@@ -152,3 +152,6 @@ endpoints:
         type: string
         description: region name (optional).
         example: eu-central-1
+dependencies:
+  aws-config:
+    version: 0.0.9

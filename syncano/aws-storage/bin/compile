@@ -1,6 +1,11 @@
 #!/usr/bin/env sh
 
+if [ ! -f 'node_modules' ]; then
+    npm install
+fi
 mkdir -p .dist
-node ../merge_deps.js aws-utils/package.json
-copyfiles -e '../aws-utils/src/*.test.js' -f ../aws-utils/src/*.js src/aws-utils
+if [ -f '../merge_deps.js' ]; then
+    node ../merge_deps.js aws-utils/package.json
+    copyfiles -e '../aws-utils/src/*.test.js' -f ../aws-utils/src/*.js src/aws-utils
+fi
 npx babel src --out-dir .dist/src --copy-files

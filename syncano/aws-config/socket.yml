@@ -1,6 +1,6 @@
 name: aws-config
 description: Description of aws-config
-version: 0.0.6
+version: 0.0.9
 classes:
   aws_id:
     - name: AWS_ACCESS_KEY_ID
